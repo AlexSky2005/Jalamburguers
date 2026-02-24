@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="JalFits - Tu gimnasio local asociado a Jalamburguers. Planes accesibles y descuentos especiales.">
+  <title>JalFits - Gimnasio Local</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="gym">
+
+<!-- ===================================================================
+     HEADER
+     =================================================================== -->
+<header class="hero gym" style="position: relative;">
+  <!-- 📷 IMAGEN/VIDEO del gimnasio en esquina superior derecha (120x120px logo) -->
+  <img src="images/gym-logo.png" alt="JalFits Logo" class="logo-circular-top-right" style="border-color: var(--color-accent);">
+
+  <div class="container">
+    <nav class="nav-row">
+      <a href="index.html" class="logo-brand">
+        <span>JalFits 💪</span>
+      </a>
+      <nav class="main-nav">
+        <a href="#plans">Planes</a>
+        <a href="#contact">Contacto</a>
+        <a href="index.html">← Jalamburguers</a>
+        <a href="#" id="auth-btn" class="btn ghost" style="border: none; background: transparent; color: var(--color-white); padding: 0; margin: 0;">🔐 Iniciar Sesión</a>
+      </nav>
+    </nav>
+
+    <div class="hero-inner">
+      <h1>JalFits</h1>
+      <p class="lead">Entrena duro. Come inteligente. Tu gimnasio local con descuentos especiales.</p>
+      <div class="hero-actions">
+        <a href="#plans" class="btn">Ver planes</a>
+        <a href="index.html" class="btn ghost">Volver a Jalamburguers</a>
+      </div>
+      <!-- 📹 VIDEO O FOTO del gimnasio: Ocupa todo el recuadro (100% ancho) -->
+      <!-- Opción 1: Video -->
+      <!-- <video style="width: 100%; height: 400px; object-fit: cover; border-radius: 12px; margin-top: 32px;" controls>
+        <source src="images/gym-video.mp4" type="video/mp4">
+        Tu navegador no soporta videos HTML5
+      </video> -->
+      
+      <!-- Opción 2: Imagen del gimnasio -->
+      <!-- <img src="images/gym.jpg" alt="Interior del Gimnasio JalFits" style="width: 100%; height: 400px; object-fit: cover; border-radius: 12px; margin-top: 32px;"> -->
+      
+      <!-- Placeholder temporal -->
+      <div style="margin-top: 32px; background: var(--color-border); border-radius: var(--border-radius); padding: 60px 20px; text-align: center; color: var(--color-text-light);">
+        <p>📹 Aquí va tu foto o video del gimnasio (images/gym.jpg o gym.mp4)</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===================================================================
+     MAIN CONTENT
+     =================================================================== -->
+<main>
+  <!-- PLANS SECTION -->
+  <section id="plans" class="container">
+    <h2>💪 Planes de Membresía</h2>
+    <p class="muted">Acceso completo a todas nuestras instalaciones: máquinas, pesas, clases grupales, piscina y sauna.</p>
+
+    <div class="grid cards">
+      <div class="card">
+        <h3>Plan Mensual</h3>
+        <p class="price" id="price-monthly">30€</p>
+        <p style="color: var(--color-accent); font-weight: 600;" id="discount-label-monthly" style="display: none;"></p>
+        <ul style="margin: 0; padding: 0 0 0 20px; color: var(--color-text);">
+          <li>Acceso 24/7 al gimnasio</li>
+          <li>Todas las máquinas e instalaciones</li>
+          <li>Clases grupales ilimitadas</li>
+          <li>Acceso a sauna y piscina</li>
+        </ul>
+        <button class="btn" onclick="enrollPlan('mensual')">Apuntarme Ahora</button>
+      </div>
+
+      <div class="card">
+        <h3>Plan Trimestral</h3>
+        <p class="price" id="price-quarterly">75€</p>
+        <p style="color: var(--color-accent); font-weight: 600;" id="discount-label-quarterly">Ahorra 15% vs. mensual</p>
+        <ul style="margin: 0; padding: 0 0 0 20px; color: var(--color-text);">
+          <li>Acceso 24/7 al gimnasio</li>
+          <li>Todas las máquinas e instalaciones</li>
+          <li>Clases grupales ilimitadas</li>
+          <li>Acceso a sauna y piscina</li>
+          <li>✨ Sesión de orientación gratis</li>
+        </ul>
+        <button class="btn" onclick="enrollPlan('trimestral')">Apuntarme Ahora</button>
+      </div>
+    </div>
+
+    <!-- 🎉 MENSAJE DE DESCUENTO: Se muestra si viene con descuento de Jalamburguers -->
+    <div id="discountMessage" style="margin-top: 32px; padding: 24px; background: rgba(16, 185, 129, 0.15); border: 2px solid var(--color-accent); border-radius: var(--border-radius); text-align: center; display: none;">
+      <h3 style="color: var(--color-accent); margin-top: 0;">🎉 ¡Descuento Especial Activo!</h3>
+      <p id="discountText" style="margin: 0; font-size: 1.125rem; font-weight: 600; color: var(--color-accent);"></p>
+      <p style="margin-top: 12px; font-size: 0.875rem; color: var(--color-text-light);">El descuento se aplicará automáticamente al finalizar la compra</p>
+    </div>
+  </section>
+  
+  <!-- BENEFITS SECTION -->
+  <section class="container">
+    <h2>✨ ¿Por qué elegir JalFits?</h2>
+    <div class="grid cards">
+      <div class="card">
+        <h3>🏋️ Instalaciones Modernas</h3>
+        <p>Equipamiento de última generación, máquinas nuevas y espacios amplios para tu comodidad.</p>
+      </div>
+      <div class="card">
+        <h3>👥 Clases Grupales</h3>
+        <p>Aeróbic, yoga, pilates, spinning y más. Clases a diferentes horas del día.</p>
+      </div>
+      <div class="card">
+        <h3>🤝 Comunidad Activa</h3>
+        <p>Únete a una comunidad de deportistas comprometidos. Eventos y competiciones mensuales.</p>
+      </div>
+      <div class="card">
+        <h3>🍔 Partnership con Jalamburguers</h3>
+        <p>Obtén descuentos especiales en comidas saludables. Comida y entrenamiento en un lugar.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="container">
+    <div class="about">
+      <h2>📍 Ubicación y Contacto</h2>
+      
+      <div class="contact">
+        <div>
+          <h4>Dirección</h4>
+          <p>C/ Ejemplo 123<br>Ciudad, 12345</p>
+        </div>
+        <div>
+          <h4>Teléfono</h4>
+          <p><a href="tel:+34600000000" style="color: var(--color-accent); text-decoration: none;">+34 600 000 000</a></p>
+        </div>
+        <div>
+          <h4>Email</h4>
+          <p><a href="mailto:info@jalfits.example" style="color: var(--color-accent); text-decoration: none;">info@jalfits.example</a></p>
+        </div>
+        <div>
+          <h4>Horario</h4>
+          <p>Lun-Vie: 06:00 — 23:00<br>Sáb-Dom: 08:00 — 22:00</p>
+        </div>
+      </div>
+
+      <!-- 📸 MAPA: Agregar aquí tu mapa -->
+      <!-- Opción 1: Google Maps -->
+      <!-- <iframe src="https://www.google.com/maps/embed?pb=..." width="100%" height="450" style="border:0; border-radius: 12px; margin-top: 24px;" allowfullscreen="" loading="lazy"></iframe> -->
+      
+      <!-- Opción 2: Imagen de mapa -->
+      <!-- <img src="images/gym-map.jpg" alt="Mapa de ubicación JalFits" style="width: 100%; border-radius: 12px; margin-top: 24px;"> -->
+      
+      <div style="margin-top: 24px; background: var(--color-border); border-radius: var(--border-radius); padding: 40px; text-align: center; color: var(--color-text-light);">
+        <p>🗺️ Aquí va tu mapa (Google Maps, Leaflet, etc.)</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===================================================================
+     FOOTER
+     =================================================================== -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <!-- LOGO CIRCULAR en footer (60x60px) -->
+      <img src="images/gym-logo.png" alt="Logo JalFits" class="logo-circular-md" style="border-color: var(--color-accent);">
+      <div>
+        <h4>JalFits</h4>
+        <p>Tu gimnasio local con planes accesibles y ambiente de comunidad.</p>
+      </div>
+    </div>
+    <div>
+      <h4>Síguenos</h4>
+      <p>
+        <a href="#">Instagram</a> • 
+        <a href="#">Facebook</a> • 
+        <a href="#">TikTok</a>
+      </p>
+    </div>
+    <div>
+      <h4>Enlaces</h4>
+      <p>
+        <a href="index.html">Jalamburguers</a> • 
+        <a href="#">Política de privacidad</a>
+      </p>
+    </div>
+  </div>
+  <div class="container" style="text-align: center; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 24px;">
+    <p style="margin: 0; font-size: 0.875rem; color: rgba(255, 255, 255, 0.6);">
+      © 2026 JalFits • Todos los derechos reservados | Asociado de Jalamburguers
+    </p>
+  </div>
+</footer>
+
+<!-- ===================================================================
+     SCRIPTS
+     =================================================================== -->
+<script src="js/notifications.js"></script>
+<script src="js/cookies.js"></script>
+<script src="js/auth.js"></script>
+
+<script>
+const GYM_PLANS = {
+  mensual: { price: 30, name: 'Plan Mensual' },
+  trimestral: { price: 75, name: 'Plan Trimestral' }
+};
+
+let activeDiscount = null;
+
+function enrollGymPlan(plan, originalPrice) {
+  let finalPrice = originalPrice;
+  let discountMessage = '';
+
+  if (activeDiscount) {
+    finalPrice = originalPrice * 0.7;
+    discountMessage = ` (Descuento 30%: ${originalPrice}€ → ${finalPrice.toFixed(2)}€)`;
+  }
+
+  const message = `${GYM_PLANS[plan].name} seleccionado${discountMessage}. Contacta con nosotros para completar tu registro.`;
+  notificationManager.success('¡Gracias!', message);
+}
+
+function enrollPlan(plan) {
+  // Show a confirmation toast, then redirect to the dedicated registration page
+  const originalPrice = GYM_PLANS[plan]?.price || 0;
+  const finalPrice = activeDiscount ? (originalPrice * 0.7) : originalPrice;
+  const discountMessage = activeDiscount ? ` (Descuento 30%: ${originalPrice}€ → ${finalPrice.toFixed(2)}€)` : '';
+  const message = `${GYM_PLANS[plan].name} seleccionado${discountMessage}. Abriendo formulario de registro...`;
+
+  if (typeof notificationManager !== 'undefined') {
+    notificationManager.success('¡Gracias!', message);
+  }
+
+  const params = new URLSearchParams({ plan, price: finalPrice.toString(), discount: activeDiscount ? '1' : '0' });
+  setTimeout(() => {
+    window.location.href = `jalfits-register.html?${params.toString()}`;
+  }, 900);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (localStorage.getItem('gymDiscount') === 'true') {
+    activeDiscount = true;
+    
+    const messageDiv = document.getElementById('discountMessage');
+    const messageText = document.getElementById('discountText');
+    const priceMonthly = document.getElementById('price-monthly');
+    const priceQuarterly = document.getElementById('price-quarterly');
+    const discountLabelMonthly = document.getElementById('discount-label-monthly');
+    const discountLabelQuarterly = document.getElementById('discount-label-quarterly');
+    
+    messageDiv.style.display = 'block';
+    messageText.innerText = 'Descuento del 30% aplicado gracias a Jalamburguers 💪';
+    
+    const monthlyDiscount = (30 * 0.7).toFixed(2);
+    const quarterlyDiscount = (75 * 0.7).toFixed(2);
+    
+    priceMonthly.innerHTML = `<span style="text-decoration: line-through; opacity: 0.6;">30€</span> ${monthlyDiscount}€`;
+    priceQuarterly.innerHTML = `<span style="text-decoration: line-through; opacity: 0.6;">75€</span> ${quarterlyDiscount}€`;
+    
+    discountLabelMonthly.style.display = 'block';
+    discountLabelMonthly.textContent = '⚡ 30% de descuento aplicado';
+    discountLabelQuarterly.textContent = '⚡ Ahorra 15% + 30% descuento = 40.5%';
+    
+    localStorage.removeItem('gymDiscount');
+    
+    notificationManager.success('¡Descuento de JalFits!', 'Tienes 30% de descuento en tu membresía');
+  }
+});
+
+// --- Card lookup UI: permite ingresar código de tarjeta y ver tiempo restante ---
+function renderCardLookup() {
+  const container = document.createElement('div');
+  container.id = 'card-lookup-container';
+  container.style.marginTop = '32px';
+  container.innerHTML = `
+    <h3>🔑 ¿Tienes una tarjeta física de JalFits?</h3>
+    <p class="muted">Introduce el código de tu tarjeta para ver cuánto tiempo queda en tu plan.</p>
+    <div style="display:flex; gap:8px; align-items:center; margin-top:12px;">
+      <input id="card-code-input" type="text" placeholder="Código de tarjeta (p.ej. JAL-1234-ABCD)" style="padding:8px; flex:1; border-radius:6px; border:1px solid rgba(255,255,255,0.08); background:transparent; color:inherit;">
+      <button class="btn" onclick="checkGymCard()">Comprobar</button>
+    </div>
+    <div id="card-check-result" style="margin-top:16px;"></div>
+  `;
+
+  const plansSection = document.getElementById('plans');
+  if (plansSection) plansSection.parentNode.insertBefore(container, plansSection.nextSibling);
+}
+
+function checkGymCard() {
+  const code = document.getElementById('card-code-input').value.trim();
+  const result = document.getElementById('card-check-result');
+  result.innerHTML = '';
+  if (!code) {
+    notificationManager.error('Código vacío', 'Introduce el código de tu tarjeta.');
+    return;
+  }
+
+  // Lookup in localStorage (gym_cards)
+  const raw = localStorage.getItem('gym_cards');
+  if (!raw) {
+    result.innerHTML = '<p class="muted">No se han encontrado tarjetas registradas en este navegador.</p>';
+    return;
+  }
+
+  let cards = [];
+  try { cards = JSON.parse(raw) || []; } catch(e) { cards = []; }
+
+  const card = cards.find(c => c.code === code);
+  if (!card) {
+    result.innerHTML = `<p class="muted">Código no encontrado. ¿Seguiste correctamente el proceso de registro?</p>`;
+    notificationManager.error('Código no válido', 'No se ha encontrado la tarjeta.');
+    return;
+  }
+
+  // Calcular tiempo restante
+  const now = new Date();
+  const expiry = new Date(card.expiryDate);
+  const diffMs = expiry - now;
+  if (diffMs <= 0) {
+    result.innerHTML = `<div class="card"><h4>Tarjeta: ${card.code}</h4><p>Plan: ${card.plan} — Expirado el ${expiry.toLocaleDateString()}</p><p style="color:var(--color-accent);">Renovación necesaria</p></div>`;
+    notificationManager.warning('Plan caducado', 'Tu membresía ha expirado. Renovar para volver a usar el gimnasio.');
+    return;
+  }
+
+  const daysLeft = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+  result.innerHTML = `
+    <div class="card">
+      <h4>Tarjeta: ${card.code}</h4>
+      <p>Titular: ${card.name} — DNI: ${card.dni}</p>
+      <p>Plan: ${card.plan}</p>
+      <p>Vence el: ${expiry.toLocaleDateString()} — <strong>${daysLeft} días restantes</strong></p>
+    </div>
+  `;
+  notificationManager.success('Tarjeta válida', `Quedan ${daysLeft} días en tu plan.`);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  renderCardLookup();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jalamburguers - Comida saludable con estrago de puntos. Entrena, come bien y ahorra.">
+  <title>Jalamburguers - Burgers Fit & Recompensas</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ===================================================================
+     HEADER
+     =================================================================== -->
+<header class="hero" style="position: relative;">
+  <!-- LOGO CIRCULAR en esquina superior derecha (120x120px) -->
+  <img src="images/logo1.png" alt="Logo Jalamburguers" class="logo-circular-top-right">
+
+  <div class="container">
+    <nav class="nav-row">
+      <a href="index.html" class="logo-brand">
+        <img src="images/logo1.png" alt="Logo Jalamburguers" class="logo-img">
+        <span>Jalamburguers</span>
+      </a>
+      <nav class="main-nav">
+        <a href="#products">Productos</a>
+        <a href="#rewards">Recompensas</a>
+        <a href="#about">Sobre</a>
+        <a href="jalfits.html">JalFits 💪</a>
+        <a href="#" id="auth-btn" class="btn ghost" style="border: none; background: transparent; color: var(--color-white); padding: 0; margin: 0;">🔐 Iniciar Sesión</a>
+      </nav>
+    </nav>
+
+    <div class="hero-inner">
+      <h1>Jalamburguers</h1>
+      <p class="lead">Entrena. Come saludable. Gana puntos y ahorra en tu gimnasio local.</p>
+      <div class="hero-actions">
+        <a href="#products" class="btn">Ver burgers</a>
+        <a href="#rewards" class="btn ghost">Ver recompensas</a>
+      </div>
+      <!-- LOGO HORIZONTAL - Ocupa todo el recuadro amarillo (ancho 100%, alto 200px) -->
+      <div class="logo-horizontal-banner">
+        <img src="images/logo2.png" alt="Jalamburguers Horizontal">
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===================================================================
+     MAIN CONTENT
+     =================================================================== -->
+<main>
+  <!-- METRICS SECTION -->
+  <section class="container">
+    <div class="metrics">
+      <div>
+        <h3>Puntos</h3>
+        <span id="points">0</span>
+      </div>
+      <div>
+        <h3>Compras</h3>
+        <span id="purchases">0</span>
+      </div>
+      <div>
+        <h3>Gasto total</h3>
+        <span id="revenue">0€</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS SECTION -->
+  <section id="products" class="container">
+    <h2>🍔 Burgers Fit</h2>
+    <p class="muted">Ingredientes saludables, diseñadas para deportistas que no quieren sacrificar sabor.</p>
+    
+    <div class="grid cards">
+      <!-- 📷 BURGER 1: Reemplazar el div con una tarjeta con imagen -->
+      <!-- Opción: Agregar <img src="images/burger1.jpg" alt="JalBurger Proteica" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 12px;"> -->
+      <div class="card">
+        <h3>JalBurger Proteica</h3>
+        <p>Carne magra de res + pan integral + tomate fresco + lechuga</p>
+        <p class="price">8€</p>
+        <button class="btn" onclick="openCheckout()">Comprar — +10 pts</button>
+      </div>
+
+      <!-- 📷 BURGER 2: Reemplazar el div con una tarjeta con imagen -->
+      <!-- Opción: Agregar <img src="images/burger2.jpg" alt="JalVegan Power" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 12px;"> -->
+      <div class="card">
+        <h3>JalVegan Power</h3>
+        <p>Tofu marinado + espinaca + aguacate + salsa de tahini</p>
+        <p class="price">7€</p>
+        <button class="btn" onclick="openCheckout()">Comprar — +8 pts</button>
+      </div>
+
+      <!-- 📷 BURGER 3: Reemplazar el div con una tarjeta con imagen -->
+      <!-- Opción: Agregar <img src="images/burger3.jpg" alt="Chicken Boost" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 12px;"> -->
+      <div class="card">
+        <h3>Chicken Boost</h3>
+        <p>Pollo grill + aguacate + queso mozzarella + pan tostado</p>
+        <p class="price">9€</p>
+        <button class="btn" onclick="openCheckout()">Comprar — +12 pts</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- REWARDS SECTION -->
+  <section id="rewards" class="container">
+    <div class="rewards">
+      <h2>🎁 Recompensas con Puntos</h2>
+      <p class="muted">Acumula puntos con cada compra y canjéalos por descuentos.</p>
+      
+      <div class="grid rewards-grid">
+        <div class="card reward">
+          <h3>Descuento Burger</h3>
+          <p><strong>50 puntos</strong> → 20% descuento en una burger</p>
+          <button class="btn" onclick="redeem(50)">Canjear</button>
+        </div>
+
+        <div class="card reward">
+          <h3>Descuento JalFits</h3>
+          <p><strong>100 puntos</strong> → 30% descuento en membresía JalFits</p>
+          <button class="btn" onclick="redeemGym(100)">Canjear y ir a JalFits</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT & CONTACT SECTION -->
+  <section id="about" class="container">
+    <div class="about">
+      <h2>ℹ️ Sobre Jalamburguers</h2>
+      <p>Jalamburguers es una iniciativa local que combina comida saludable de calidad con un sistema de recompensas inteligente. Nuestro objetivo es que disfrutes de burgers deliciosas mientras apoyas tu estilo de vida activo y ahorras dinero en tu gimnasio asociado JalFits.</p>
+      
+      <h3 style="color: var(--color-accent); margin-top: 24px;">📍 Información de contacto</h3>
+      <div class="contact">
+        <div>
+          <h4>Dirección</h4>
+          <p>C/ Ejemplo 123, Ciudad</p>
+        </div>
+        <div>
+          <h4>Horario</h4>
+          <p>Lunes a Domingo<br>11:00 — 23:00</p>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <p>Tel: +34 600 000 000<br>Email: info@jalamburguers.example</p>
+        </div>
+      </div>
+
+      <!-- 📸 MAPA: Agregar Google Maps o Leaflet aquí (reemplazar este div) -->
+      <!-- Opción 1: Usar Google Maps embed -->
+      <!-- <iframe src="https://www.google.com/maps/embed?pb=..." width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade;"></iframe> -->
+      
+      <!-- Opción 2: Usar imagen estática de mapa -->
+      <!-- <img src="images/map.jpg" alt="Mapa de ubicación" style="width: 100%; border-radius: 12px; margin-top: 24px;"> -->
+
+      <!-- Placeholder for Google Maps or similar -->
+      <div style="margin-top: 24px; background: var(--color-border); border-radius: var(--border-radius); padding: 40px; text-align: center; color: var(--color-text-light);">
+        <p>🗺️ Aquí va tu mapa (Google Maps, Leaflet, etc.)</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===================================================================
+     FOOTER
+     =================================================================== -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <!-- LOGO CIRCULAR en footer (60x60px) -->
+      <img src="images/logo1.png" alt="Logo Jalamburguers" class="logo-circular-md">
+      <div>
+        <h4>Jalamburguers</h4>
+        <p>Comida sana para gente activa. Entrena. Come. Ahorra.</p>
+      </div>
+    </div>
+    <div>
+      <h4>Síguenos</h4>
+      <p>
+        <a href="#">Instagram</a> • 
+        <a href="#">Facebook</a> • 
+        <a href="#">Twitter</a>
+      </p>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <p>
+        <a href="#">Política de privacidad</a> • 
+        <a href="#">Términos de servicio</a>
+      </p>
+    </div>
+  </div>
+  <div class="container" style="text-align: center; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 24px;">
+    <p style="margin: 0; font-size: 0.875rem; color: rgba(255, 255, 255, 0.6);">
+      © 2026 Jalamburguers • Todos los derechos reservados | Gimnasio asociado: JalFits 💪
+    </p>
+  </div>
+</footer>
+
+<!-- ===================================================================
+     SCRIPTS
+     =================================================================== -->
+<script src="js/notifications.js"></script>
+<script src="js/cookies.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/points.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
