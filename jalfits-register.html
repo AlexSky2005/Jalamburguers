@@ -65,13 +65,129 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container">&copy; JalFits</div>
+    <div class="container footer-grid">
+      <div>
+        <h4>JalFits</h4>
+        <p>Tu gimnasio local con planes accesibles.</p>
+      </div>
+      <div>
+        <h4>Enlaces</h4>
+        <p>
+          <a href="jalfits.html">Volver</a> • 
+          <a href="#" onclick="openModal('privacyModal'); return false;">Política de privacidad</a> • 
+          <a href="#" onclick="openModal('termsModal'); return false;">Términos de servicio</a>
+        </p>
+      </div>
+    </div>
+    <div class="container" style="text-align: center; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 24px;">
+      <p style="margin: 0; font-size: 0.875rem; color: rgba(255, 255, 255, 0.6);">
+        © 2026 JalFits • Todos los derechos reservados
+      </p>
+    </div>
   </footer>
 
   <script src="js/notifications.js"></script>
   <script src="js/cookies.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/gym.js"></script>
+
+  <!-- MODALES -->
+  <div id="privacyModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Política de Privacidad</h2>
+        <span class="close" onclick="closeModal('privacyModal')">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p><strong>Última actualización:</strong> 2026</p>
+        
+        <h3>1. Introducción</h3>
+        <p>JalFits respeta tu privacidad y se compromete a proteger tus datos personales. Esta política de privacidad explica cómo recopilamos, utilizamos y protegemos tu información.</p>
+        
+        <h3>2. Información que Recopilamos</h3>
+        <p>Recopilamos información que nos proporcionas directamente, incluyendo:</p>
+        <ul>
+          <li>Nombre, edad y datos personales</li>
+          <li>Número de DNI</li>
+          <li>Información de membresía</li>
+          <li>Datos de pago</li>
+        </ul>
+        
+        <h3>3. Uso de la Información</h3>
+        <p>Utilizamos tu información para:</p>
+        <ul>
+          <li>Procesar tu membresía de gimnasio</li>
+          <li>Gestionar tu cuenta de usuario</li>
+          <li>Enviar actualizaciones sobre renovaciones y promociones</li>
+          <li>Mejorar nuestros servicios</li>
+        </ul>
+        
+        <h3>4. Protección de Datos</h3>
+        <p>Implementamos medidas de seguridad técnicas y organizativas para proteger tus datos contra acceso no autorizado, alteración o destrucción.</p>
+        
+        <h3>5. Derechos del Usuario</h3>
+        <p>Tienes derecho a acceder, corregir o eliminar tus datos personales. Contacta con nosotros en: info@jalfits.example</p>
+        
+        <h3>6. Cambios en esta Política</h3>
+        <p>Nos reservamos el derecho a actualizar esta política de privacidad. Te notificaremos de cambios significativos.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="termsModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Términos de Servicio</h2>
+        <span class="close" onclick="closeModal('termsModal')">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p><strong>Última actualización:</strong> 2026</p>
+        
+        <h3>1. Aceptación de Términos</h3>
+        <p>Al acceder y utilizar JalFits, aceptas quedar vinculado por estos términos y condiciones.</p>
+        
+        <h3>2. Uso del Servicio</h3>
+        <p>JalFits proporciona acceso a instalaciones de gimnasio de calidad. Nos reservamos el derecho a modificar o suspender el servicio en cualquier momento.</p>
+        
+        <h3>3. Membresía</h3>
+        <p>Las membresías están disponibles en diferentes planes: mensual, trimestral, etc. El acceso se proporciona mediante tarjeta física o digital.</p>
+        
+        <h3>4. Pago y Renovación</h3>
+        <p>Los pagos deben realizarse según los términos acordados. Los planes se renuevan automáticamente a menos que canceles antes de la fecha de vencimiento.</p>
+        
+        <h3>5. Condiciones de Uso del Gimnasio</h3>
+        <p>Los miembros aceptan cumplir con todas las normas del gimnasio, incluyendo comportamiento respetuoso, uso adecuado de equipos y mantenimiento de la limpieza.</p>
+        
+        <h3>6. Limitación de Responsabilidad</h3>
+        <p>JalFits no será responsable por lesiones personales, pérdida de objetos personales o daños derivados del uso de nuestras instalaciones.</p>
+        
+        <h3>7. Cancelación</h3>
+        <p>Puedes cancelar tu membresía con 30 días de aviso. Los pagos no son reembolsables.</p>
+        
+        <h3>8. Contacto</h3>
+        <p>Para consultas sobre estos términos, contacta con: info@jalfits.example</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  function openModal(modalId) {
+    document.getElementById(modalId).classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(modalId) {
+    document.getElementById(modalId).classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+
+  window.onclick = function(event) {
+    if (event.target.classList.contains('modal')) {
+      event.target.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+  }
+  </script>
   <script>
     // Pre-fill form from query params
     function qs() { return new URLSearchParams(window.location.search); }

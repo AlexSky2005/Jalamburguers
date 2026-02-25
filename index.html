@@ -13,6 +13,12 @@
      HEADER
      =================================================================== -->
 <header class="hero" style="position: relative;">
+  <!-- VIDEO BACKGROUND -->
+  <video autoplay muted loop class="hero-video">
+    <source src="https://videos.pexels.com/video-files/3945696/3945696-hd_1280_720_25fps.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+
   <!-- LOGO CIRCULAR en esquina superior derecha (120x120px) -->
   <img src="images/logo1.png" alt="Logo Jalamburguers" class="logo-circular-top-right">
 
@@ -20,7 +26,6 @@
     <nav class="nav-row">
       <a href="index.html" class="logo-brand">
         <img src="images/logo1.png" alt="Logo Jalamburguers" class="logo-img">
-        <span>Jalamburguers</span>
       </a>
       <nav class="main-nav">
         <a href="#products">PRODUCTOS</a>
@@ -32,15 +37,16 @@
     </nav>
 
     <div class="hero-inner">
-      <h1>Jalamburguers</h1>
-      <p class="lead">Entrena. Come saludable. Gana puntos y ahorra en tu gimnasio local.</p>
-      <div class="hero-actions">
-        <a href="#products" class="btn">Ver burgers</a>
-        <a href="#rewards" class="btn ghost">Ver recompensas</a>
-      </div>
       <!-- LOGO HORIZONTAL - Ocupa todo el recuadro amarillo (ancho 100%, alto 200px) -->
       <div class="logo-horizontal-banner">
         <img src="images/logo2.png" alt="Jalamburguers Horizontal">
+        <div class="banner-text">
+          <h2>Entrena • Come Saludable • Gana Puntos • ¡Ahorra!</h2>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="#products" class="btn">Ver burgers</a>
+        <a href="#rewards" class="btn ghost">Ver recompensas</a>
       </div>
     </div>
   </div>
@@ -186,8 +192,8 @@
     <div>
       <h4>Legal</h4>
       <p>
-        <a href="#">Política de privacidad</a> • 
-        <a href="#">Términos de servicio</a>
+        <a href="#" onclick="openModal('privacyModal'); return false;">Política de privacidad</a> • 
+        <a href="#" onclick="openModal('termsModal'); return false;">Términos de servicio</a>
       </p>
     </div>
   </div>
@@ -199,8 +205,111 @@
 </footer>
 
 <!-- ===================================================================
+     MODALES
+     =================================================================== -->
+<!-- Modal Política de Privacidad -->
+<div id="privacyModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Política de Privacidad</h2>
+      <span class="close" onclick="closeModal('privacyModal')">&times;</span>
+    </div>
+    <div class="modal-body">
+      <p><strong>Última actualización:</strong> 2026</p>
+      
+      <h3>1. Introducción</h3>
+      <p>Jalamburguers respeta tu privacidad y se compromete a proteger tus datos personales. Esta política de privacidad explica cómo recopilamos, utilizamos y protegemos tu información.</p>
+      
+      <h3>2. Información que Recopilamos</h3>
+      <p>Recopilamos información que nos proporcionas directamente, incluyendo:</p>
+      <ul>
+        <li>Nombre y email</li>
+        <li>Información de compra</li>
+        <li>Datos de registro de cuenta</li>
+        <li>Información de pago</li>
+      </ul>
+      
+      <h3>3. Uso de la Información</h3>
+      <p>Utilizamos tu información para:</p>
+      <ul>
+        <li>Procesar tus compras y pedidos</li>
+        <li>Gestionar tu cuenta de usuario</li>
+        <li>Enviar actualizaciones sobre promociones y recompensas</li>
+        <li>Mejorar nuestros servicios</li>
+      </ul>
+      
+      <h3>4. Protección de Datos</h3>
+      <p>Implementamos medidas de seguridad técnicas y organizativas para proteger tus datos contra acceso no autorizado, alteración o destrucción.</p>
+      
+      <h3>5. Derechos del Usuario</h3>
+      <p>Tienes derecho a acceder, corregir o eliminar tus datos personales. Contacta con nosotros en: info@jalamburguers.example</p>
+      
+      <h3>6. Cambios en esta Política</h3>
+      <p>Nos reservamos el derecho a actualizar esta política de privacidad. Te notificaremos de cambios significativos.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Términos de Servicio -->
+<div id="termsModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Términos de Servicio</h2>
+      <span class="close" onclick="closeModal('termsModal')">&times;</span>
+    </div>
+    <div class="modal-body">
+      <p><strong>Última actualización:</strong> 2026</p>
+      
+      <h3>1. Aceptación de Términos</h3>
+      <p>Al acceder y utilizar Jalamburguers, aceptas quedar vinculado por estos términos y condiciones.</p>
+      
+      <h3>2. Uso del Servicio</h3>
+      <p>Jalamburguers proporciona un servicio de venta de comida saludable con un sistema de recompensas de puntos. Nos reservamos el derecho a modificar o suspender el servicio en cualquier momento.</p>
+      
+      <h3>3. Cuenta de Usuario</h3>
+      <p>Eres responsable de mantener la confidencialidad de tu contraseña y cuenta. Aceptas toda actividad que ocurra bajo tu cuenta.</p>
+      
+      <h3>4. Pedidos y Pagos</h3>
+      <p>Los pedidos están sujetos a aceptación. Nos reservamos el derecho de rechazar cualquier pedido. Los precios pueden cambiar sin previo aviso.</p>
+      
+      <h3>5. Sistema de Puntos</h3>
+      <p>Los puntos se acumulan con cada compra según la promoción establecida. Los puntos no tienen valor monetario y solo pueden canjearse por descuentos ofrecidos por Jalamburguers.</p>
+      
+      <h3>6. Limitación de Responsabilidad</h3>
+      <p>Jalamburguers no será responsable por daños indirectos, incidentales, especiales o consecuentes derivados del uso de nuestro servicio.</p>
+      
+      <h3>7. Ley Aplicable</h3>
+      <p>Estos términos se rigen por las leyes aplicables. Cualquier disputa se resolverá en los tribunales competentes.</p>
+      
+      <h3>8. Contacto</h3>
+      <p>Para consultas sobre estos términos, contacta con: info@jalamburguers.example</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================================================================
      SCRIPTS
      =================================================================== -->
+<script>
+function openModal(modalId) {
+  document.getElementById(modalId).classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(modalId) {
+  document.getElementById(modalId).classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+// Cerrar modal si se hace click fuera de él
+window.onclick = function(event) {
+  if (event.target.classList.contains('modal')) {
+    event.target.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+}
+</script>
+
 <script src="js/notifications.js"></script>
 <script src="js/cookies.js"></script>
 <script src="js/auth.js"></script>

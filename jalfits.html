@@ -13,6 +13,12 @@
      HEADER
      =================================================================== -->
 <header class="hero gym" style="position: relative;">
+  <!-- VIDEO BACKGROUND -->
+  <video autoplay muted loop class="hero-video">
+    <source src="https://videos.pexels.com/video-files/3840987/3840987-hd_1280_720_30fps.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+
   <!-- 📷 IMAGEN/VIDEO del gimnasio en esquina superior derecha (120x120px logo) -->
   <img src="images/gym-logo.png" alt="JalFits Logo" class="logo-circular-top-right" style="border-color: var(--color-accent);">
 
@@ -167,8 +173,6 @@
 <footer class="site-footer">
   <div class="container footer-grid">
     <div style="display: flex; align-items: center; gap: 16px;">
-      <!-- LOGO CIRCULAR en footer (60x60px) -->
-      <img src="images/gym-logo.png" alt="Logo JalFits" class="logo-circular-md" style="border-color: var(--color-accent);">
       <div>
         <h4>JalFits</h4>
         <p>Tu gimnasio local con planes accesibles y ambiente de comunidad.</p>
@@ -186,7 +190,8 @@
       <h4>Enlaces</h4>
       <p>
         <a href="index.html">Jalamburguers</a> • 
-        <a href="#">Política de privacidad</a>
+        <a href="#" onclick="openModal('privacyModal'); return false;">Política de privacidad</a> • 
+        <a href="#" onclick="openModal('termsModal'); return false;">Términos de servicio</a>
       </p>
     </div>
   </div>
@@ -342,6 +347,109 @@ function checkGymCard() {
 document.addEventListener('DOMContentLoaded', function() {
   renderCardLookup();
 });
+</script>
+
+<!-- ===================================================================
+     MODALES - POLÍTICA Y TÉRMINOS
+     =================================================================== -->
+<!-- Modal Política de Privacidad -->
+<div id="privacyModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Política de Privacidad</h2>
+      <span class="close" onclick="closeModal('privacyModal')">&times;</span>
+    </div>
+    <div class="modal-body">
+      <p><strong>Última actualización:</strong> 2026</p>
+      
+      <h3>1. Introducción</h3>
+      <p>JalFits respeta tu privacidad y se compromete a proteger tus datos personales. Esta política de privacidad explica cómo recopilamos, utilizamos y protegemos tu información.</p>
+      
+      <h3>2. Información que Recopilamos</h3>
+      <p>Recopilamos información que nos proporcionas directamente, incluyendo:</p>
+      <ul>
+        <li>Nombre, edad y datos personales</li>
+        <li>Número de DNI</li>
+        <li>Información de membresía</li>
+        <li>Datos de pago</li>
+      </ul>
+      
+      <h3>3. Uso de la Información</h3>
+      <p>Utilizamos tu información para:</p>
+      <ul>
+        <li>Procesar tu membresía de gimnasio</li>
+        <li>Gestionar tu cuenta de usuario</li>
+        <li>Enviar actualizaciones sobre renovaciones y promociones</li>
+        <li>Mejorar nuestros servicios</li>
+      </ul>
+      
+      <h3>4. Protección de Datos</h3>
+      <p>Implementamos medidas de seguridad técnicas y organizativas para proteger tus datos contra acceso no autorizado, alteración o destrucción.</p>
+      
+      <h3>5. Derechos del Usuario</h3>
+      <p>Tienes derecho a acceder, corregir o eliminar tus datos personales. Contacta con nosotros en: info@jalfits.example</p>
+      
+      <h3>6. Cambios en esta Política</h3>
+      <p>Nos reservamos el derecho a actualizar esta política de privacidad. Te notificaremos de cambios significativos.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Términos de Servicio -->
+<div id="termsModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Términos de Servicio</h2>
+      <span class="close" onclick="closeModal('termsModal')">&times;</span>
+    </div>
+    <div class="modal-body">
+      <p><strong>Última actualización:</strong> 2026</p>
+      
+      <h3>1. Aceptación de Términos</h3>
+      <p>Al acceder y utilizar JalFits, aceptas quedar vinculado por estos términos y condiciones.</p>
+      
+      <h3>2. Uso del Servicio</h3>
+      <p>JalFits proporciona acceso a instalaciones de gimnasio de calidad. Nos reservamos el derecho a modificar o suspender el servicio en cualquier momento.</p>
+      
+      <h3>3. Membresía</h3>
+      <p>Las membresías están disponibles en diferentes planes: mensual, trimestral, etc. El acceso se proporciona mediante tarjeta física o digital.</p>
+      
+      <h3>4. Pago y Renovación</h3>
+      <p>Los pagos deben realizarse según los términos acordados. Los planes se renuevan automáticamente a menos que canceles antes de la fecha de vencimiento.</p>
+      
+      <h3>5. Condiciones de Uso del Gimnasio</h3>
+      <p>Los miembros aceptan cumplir con todas las normas del gimnasio, incluyendo comportamiento respetuoso, uso adecuado de equipos y mantenimiento de la limpieza.</p>
+      
+      <h3>6. Limitación de Responsabilidad</h3>
+      <p>JalFits no será responsable por lesiones personales, pérdida de objetos personales o daños derivados del uso de nuestras instalaciones.</p>
+      
+      <h3>7. Cancelación</h3>
+      <p>Puedes cancelar tu membresía con 30 días de aviso. Los pagos no son reembolsables.</p>
+      
+      <h3>8. Contacto</h3>
+      <p>Para consultas sobre estos términos, contacta con: info@jalfits.example</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function openModal(modalId) {
+  document.getElementById(modalId).classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(modalId) {
+  document.getElementById(modalId).classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+// Cerrar modal si se hace click fuera de él
+window.onclick = function(event) {
+  if (event.target.classList.contains('modal')) {
+    event.target.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+}
 </script>
 
 </body>
