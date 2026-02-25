@@ -4,8 +4,571 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="JalFits - Tu gimnasio local asociado a Jalamburguers. Planes accesibles y descuentos especiales.">
-  <title>JalFits - Gimnasio Local</title>
+  <title>JalFits - Gimnasio Local Premium</title>
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* === CARRUSEL FULLSCREEN MEJORADO === */
+    .carousel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      margin: 0;
+      padding: 0;
+    }
+
+    .carousel-slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      background: #000;
+    }
+
+    .carousel-slide.active {
+      opacity: 1;
+      z-index: 10;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.6) contrast(1.2);
+    }
+
+    .carousel-slide-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      z-index: 20;
+      width: 90%;
+      max-width: 700px;
+      text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.9);
+    }
+
+    .carousel-slide-text h2 {
+      font-size: 4rem;
+      margin: 0 0 20px 0;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .carousel-slide-text p {
+      font-size: 1.3rem;
+      margin: 0;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+
+    .carousel-controls {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 14px;
+      z-index: 30;
+    }
+
+    .carousel-btn {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid white;
+      background: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+
+    .carousel-btn.active {
+      background: white;
+      width: 40px;
+      border-radius: 7px;
+    }
+
+    .carousel-btn:hover {
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .carousel-arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 2px solid white;
+      font-size: 32px;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 30;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    .carousel-arrow:hover {
+      background: rgba(255, 255, 255, 0.4);
+      transform: translateY(-50%) scale(1.15);
+    }
+
+    .carousel-arrow.prev {
+      left: 40px;
+    }
+
+    .carousel-arrow.next {
+      right: 40px;
+    }
+
+    main {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* === GALERÍA MEJORADA === */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin: 40px 0;
+    }
+
+    .gallery-item {
+      position: relative;
+      height: 300px;
+      overflow: hidden;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.08);
+      box-shadow: 0 12px 40px rgba(16, 185, 129, 0.25);
+    }
+
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px 16px 16px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.3));
+      color: white;
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+
+    /* === PLANES MEJORADOS === */
+    .plans-grid-expanded {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+      margin: 50px 0;
+    }
+
+    .plan-card-expanded {
+      background: linear-gradient(135deg, #1f1f1f 0%, #292929 100%);
+      border: 2px solid rgba(16, 185, 129, 0.2);
+      border-radius: 16px;
+      padding: 36px 28px;
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .plan-card-expanded:hover {
+      border-color: #10b981;
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(16, 185, 129, 0.25);
+    }
+
+    .plan-card-expanded.featured {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      border: none;
+      transform: scale(1.08);
+      box-shadow: 0 20px 60px rgba(16, 185, 129, 0.4);
+    }
+
+    .plan-card-expanded.featured:hover {
+      transform: scale(1.12) translateY(-12px);
+      box-shadow: 0 24px 70px rgba(16, 185, 129, 0.5);
+    }
+
+    .plan-badge {
+      position: absolute;
+      top: -14px;
+      right: 24px;
+      background: linear-gradient(135deg, #ff6b6b 0%, #c92a2a 100%);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      box-shadow: 0 6px 14px rgba(255, 107, 107, 0.3);
+    }
+
+    .plan-card-expanded.featured .plan-badge {
+      background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+      color: #1f1f1f;
+      box-shadow: 0 6px 14px rgba(255, 215, 0, 0.3);
+    }
+
+    .plan-name {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin: 16px 0 12px 0;
+      color: #10b981;
+      letter-spacing: -0.5px;
+    }
+
+    .plan-card-expanded.featured .plan-name {
+      color: #ffd700;
+    }
+
+    .plan-price {
+      font-size: 3.2rem;
+      font-weight: 900;
+      margin: 12px 0 20px 0;
+      color: #10b981;
+    }
+
+    .plan-card-expanded.featured .plan-price {
+      color: #ffd700;
+    }
+
+    .plan-price small {
+      font-size: 0.55em;
+      opacity: 0.85;
+      font-weight: 700;
+    }
+
+    .plan-duration {
+      font-size: 0.9rem;
+      padding: 12px 16px;
+      background: rgba(16, 185, 129, 0.15);
+      border-left: 4px solid #10b981;
+      margin: 12px 0 16px 0;
+      border-radius: 6px;
+      color: #a0fecb;
+      font-weight: 600;
+    }
+
+    .plan-card-expanded.featured .plan-duration {
+      background: rgba(255, 215, 0, 0.15);
+      border-left-color: #ffd700;
+      color: #ffd700;
+    }
+
+    .plan-features {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0 24px 0;
+      flex: 1;
+    }
+
+    .plan-features li {
+      padding: 12px 0 12px 36px;
+      position: relative;
+      font-size: 0.98rem;
+      color: rgba(255, 255, 255, 0.88);
+      border-bottom: 1px solid rgba(16, 185, 129, 0.12);
+      line-height: 1.5;
+    }
+
+    .plan-features li:last-child {
+      border-bottom: none;
+    }
+
+    .plan-features li:before {
+      content: '★';
+      position: absolute;
+      left: 6px;
+      color: #10b981;
+      font-size: 1rem;
+    }
+
+    .plan-card-expanded.featured .plan-features li:before {
+      color: #ffd700;
+    }
+
+    .plan-cta {
+      margin-top: 16px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+    }
+
+    .plan-cta:hover {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      transform: scale(1.06);
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+    }
+
+    .plan-card-expanded.featured .plan-cta {
+      background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+      color: #1f1f1f;
+      box-shadow: 0 6px 16px rgba(255, 215, 0, 0.3);
+    }
+
+    .plan-card-expanded.featured .plan-cta:hover {
+      background: linear-gradient(135deg, #ffaa00 0%, #ff9500 100%);
+      box-shadow: 0 8px 24px rgba(255, 215, 0, 0.4);
+    }
+
+    /* === TESTIMONIOS MEJORADOS === */
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      margin: 50px 0;
+    }
+
+    .testimonial {
+      background: linear-gradient(135deg, #ffffff 0%, #f5f1ed 100%);
+      border-left: 5px solid #10b981;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.12);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testimonial::before {
+      content: '"';
+      position: absolute;
+      top: -20px;
+      right: 20px;
+      font-size: 6rem;
+      color: rgba(16, 185, 129, 0.08);
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .testimonial:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 16px 48px rgba(16, 185, 129, 0.2);
+      border-left-color: #ff6b6b;
+    }
+
+    .testimonial-stars {
+      color: #ffc107;
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+      letter-spacing: 4px;
+      font-weight: 900;
+    }
+
+    .testimonial-quote {
+      font-size: 1.05rem;
+      color: var(--color-text);
+      margin: 20px 0 24px 0;
+      line-height: 1.8;
+      font-style: italic;
+      font-weight: 500;
+      position: relative;
+      z-index: 2;
+    }
+
+    .testimonial-author {
+      font-weight: 800;
+      color: #10b981;
+      margin-top: 16px;
+      font-size: 1.1rem;
+      letter-spacing: -0.5px;
+    }
+
+    .testimonial-title {
+      font-size: 0.85rem;
+      color: var(--color-text-light);
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    /* === VIDEO GRID === */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 28px;
+      margin: 40px 0;
+    }
+
+    .video-card {
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      aspect-ratio: 16/9;
+    }
+
+    .video-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 48px rgba(16, 185, 129, 0.25);
+    }
+
+    .video-card iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* === FACILITIES === */
+    .facilities-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin: 40px 0;
+    }
+
+    .facility-item {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0.06) 100%);
+      border: 2px solid rgba(16, 185, 129, 0.3);
+      border-radius: 14px;
+      padding: 32px 24px;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .facility-item::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.1), transparent);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .facility-item:hover {
+      border-color: #10b981;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.18) 0%, rgba(16, 185, 129, 0.1) 100%);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 36px rgba(16, 185, 129, 0.15);
+    }
+
+    .facility-item:hover::before {
+      top: -25%;
+      right: -25%;
+    }
+
+    .facility-icon {
+      font-size: 2.8rem;
+      margin-bottom: 16px;
+      display: block;
+      position: relative;
+      z-index: 2;
+    }
+
+    .facility-item h4 {
+      color: #10b981;
+      margin: 12px 0 10px 0;
+      font-size: 1.15rem;
+      font-weight: 700;
+      position: relative;
+      z-index: 2;
+    }
+
+    .facility-item p {
+      color: var(--color-text-light);
+      font-size: 0.95rem;
+      margin: 0;
+      position: relative;
+      z-index: 2;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .carousel {
+        position: relative;
+        height: 60vh;
+        width: 100%;
+      }
+
+      .carousel-slide-text h2 {
+        font-size: 2.2rem;
+      }
+
+      .carousel-slide-text p {
+        font-size: 1rem;
+      }
+
+      .carousel-arrow {
+        width: 48px;
+        height: 48px;
+        font-size: 24px;
+      }
+
+      .carousel-arrow.prev {
+        left: 20px;
+      }
+
+      .carousel-arrow.next {
+        right: 20px;
+      }
+
+      .plans-grid-expanded {
+        grid-template-columns: 1fr;
+      }
+
+      .plan-card-expanded.featured {
+        transform: scale(1);
+      }
+
+      .plan-card-expanded.featured:hover {
+        transform: translateY(-12px);
+      }
+
+      .testimonials {
+        grid-template-columns: 1fr;
+      }
+
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+
+      main {
+        margin-top: 0;
+      }
+    }
+  </style>
 </head>
 <body class="gym">
 
@@ -19,7 +582,6 @@
   </video>
   <div class="hero-overlay"></div>
 
-  <!-- 📷 IMAGEN/VIDEO del gimnasio en esquina superior derecha (120x120px logo) -->
   <img src="images/gym-logo.png" alt="JalFits Logo" class="logo-circular-top-right" style="border-color: var(--color-accent);">
 
   <div class="container">
@@ -28,103 +590,327 @@
         <span>JalFits 💪</span>
       </a>
       <nav class="main-nav">
+        <a href="#facilities">Instalaciones</a>
         <a href="#plans">Planes</a>
         <a href="#contact">Contacto</a>
         <a href="index.html">← Jalamburguers</a>
-        <a href="#" id="auth-btn" class="btn ghost" style="border: none; background: transparent; color: var(--color-white); padding: 0; margin: 0;">🔐 Iniciar Sesión</a>
+        <a href="#" id="auth-btn" class="btn">🔐 Iniciar Sesión</a>
       </nav>
     </nav>
 
     <div class="hero-inner">
-      <h1>JalFits</h1>
-      <p class="lead">Entrena duro. Come inteligente. Tu gimnasio local con descuentos especiales.</p>
+      <h1>JalFits • Tu Gimnasio Local</h1>
+      <p class="lead">Equipo moderno • Entrenadores profesionales • Comunidad activa • Descuentos con Jalamburguers</p>
       <div class="hero-actions">
         <a href="#plans" class="btn">Ver planes</a>
-        <a href="index.html" class="btn ghost">Volver a Jalamburguers</a>
-      </div>
-      <!-- 📹 VIDEO O FOTO del gimnasio: Ocupa todo el recuadro (100% ancho) -->
-      <!-- Opción 1: Video -->
-      <!-- <video style="width: 100%; height: 400px; object-fit: cover; border-radius: 12px; margin-top: 32px;" controls>
-        <source src="images/gym-video.mp4" type="video/mp4">
-        Tu navegador no soporta videos HTML5
-      </video> -->
-      
-      <!-- Opción 2: Imagen del gimnasio -->
-      <!-- <img src="images/gym.jpg" alt="Interior del Gimnasio JalFits" style="width: 100%; height: 400px; object-fit: cover; border-radius: 12px; margin-top: 32px;"> -->
-      
-      <!-- Placeholder temporal -->
-      <div style="margin-top: 32px; background: var(--color-border); border-radius: var(--border-radius); padding: 60px 20px; text-align: center; color: var(--color-text-light);">
-        <p>📹 Aquí va tu foto o video del gimnasio (images/gym.jpg o gym.mp4)</p>
+        <a href="#contact" class="btn ghost">Conoce más</a>
       </div>
     </div>
   </div>
 </header>
 
+<!-- CARRUSEL DE FOTOS FULLSCREEN -->
+<section class="carousel">
+  <div class="carousel-slide active">
+    <img src="https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg" alt="Area de pesas profesional">
+    <div class="carousel-slide-text">
+      <h2>ÁREA DE PESAS</h2>
+      <p>Equipamiento profesional para todo nivel</p>
+    </div>
+  </div>
+  
+  <div class="carousel-slide">
+    <img src="https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg" alt="Crossfit funcional">
+    <div class="carousel-slide-text">
+      <h2>ZONA FUNCIONAL</h2>
+      <p>Entrena con movimientos complejos y efectivos</p>
+    </div>
+  </div>
+  
+  <div class="carousel-slide">
+    <img src="https://images.pexels.com/photos/3838633/pexels-photo-3838633.jpeg" alt="Centro de cardio">
+    <div class="carousel-slide-text">
+      <h2>CARDIO PREMIUM</h2>
+      <p>Equipos de última generación con tecnología</p>
+    </div>
+  </div>
+  
+  <div class="carousel-slide">
+    <img src="https://images.pexels.com/photos/3621617/pexels-photo-3621617.jpeg" alt="Yoga y mindfulness">
+    <div class="carousel-slide-text">
+      <h2>YOGA & MINDFULNESS</h2>
+      <p>Recuperación y bienestar integral</p>
+    </div>
+  </div>
+  
+  <div class="carousel-slide">
+    <img src="https://images.pexels.com/photos/3807513/pexels-photo-3807513.jpeg" alt="Clases grupales dinámicas">
+    <div class="carousel-slide-text">
+      <h2>CLASES GRUPALES</h2>
+      <p>Entrena junto a tu comunidad</p>
+    </div>
+  </div>
+
+  <button class="carousel-arrow prev" onclick="carouselPrev()">❮</button>
+  <button class="carousel-arrow next" onclick="carouselNext()">❯</button>
+
+  <div class="carousel-controls">
+    <button class="carousel-btn active" onclick="carouselGoTo(0)"></button>
+    <button class="carousel-btn" onclick="carouselGoTo(1)"></button>
+    <button class="carousel-btn" onclick="carouselGoTo(2)"></button>
+    <button class="carousel-btn" onclick="carouselGoTo(3)"></button>
+    <button class="carousel-btn" onclick="carouselGoTo(4)"></button>
+  </div>
+</section>
+
 <!-- ===================================================================
      MAIN CONTENT
      =================================================================== -->
 <main>
-  <!-- PLANS SECTION -->
-  <section id="plans" class="container">
-    <h2>💪 Planes de Membresía</h2>
-    <p class="muted">Acceso completo a todas nuestras instalaciones: máquinas, pesas, clases grupales, piscina y sauna.</p>
 
-    <div class="grid cards">
-      <div class="card">
-        <h3>Plan Mensual</h3>
-        <p class="price" id="price-monthly">30€</p>
-        <p style="color: var(--color-accent); font-weight: 600;" id="discount-label-monthly" style="display: none;"></p>
-        <ul style="margin: 0; padding: 0 0 0 20px; color: var(--color-text);">
-          <li>Acceso 24/7 al gimnasio</li>
-          <li>Todas las máquinas e instalaciones</li>
-          <li>Clases grupales ilimitadas</li>
-          <li>Acceso a sauna y piscina</li>
-        </ul>
-        <button class="btn" onclick="enrollPlan('mensual')">Apuntarme Ahora</button>
+  <!-- INSTALACIONES SECTION -->
+  <section id="facilities" class="container">
+    <h2>🏋️ Nuestras Instalaciones de Clase Premium</h2>
+    <p class="muted">Equipamiento de última generación para todos los niveles y objetivos</p>
+
+    <div class="facilities-list">
+      <div class="facility-item">
+        <div class="facility-icon">🏋️</div>
+        <h4>Área de Pesas</h4>
+        <p>Mancuernas hasta 120kg, máquinas profesionales, barras olímpicas y estaciones de rack</p>
       </div>
-
-      <div class="card">
-        <h3>Plan Trimestral</h3>
-        <p class="price" id="price-quarterly">75€</p>
-        <p style="color: var(--color-accent); font-weight: 600;" id="discount-label-quarterly">Ahorra 15% vs. mensual</p>
-        <ul style="margin: 0; padding: 0 0 0 20px; color: var(--color-text);">
-          <li>Acceso 24/7 al gimnasio</li>
-          <li>Todas las máquinas e instalaciones</li>
-          <li>Clases grupales ilimitadas</li>
-          <li>Acceso a sauna y piscina</li>
-          <li>✨ Sesión de orientación gratis</li>
-        </ul>
-        <button class="btn" onclick="enrollPlan('trimestral')">Apuntarme Ahora</button>
+      <div class="facility-item">
+        <div class="facility-icon">🚴</div>
+        <h4>Cardio Premium</h4>
+        <p>15 caminadoras, 10 bicicletas estáticas, 8 elípticas con pantallas táctiles</p>
+      </div>
+      <div class="facility-item">
+        <div class="facility-icon">🧘</div>
+        <h4>Zona Funcional</h4>
+        <p>Crossfit, TRX, entrenamiento en suspensión y circuitos de movimiento corporal</p>
+      </div>
+      <div class="facility-item">
+        <div class="facility-icon">🚿</div>
+        <h4>Vestuarios Modernos</h4>
+        <p>Duchas privadas con agua caliente, casilleros seguros y espacios de relajación</p>
+      </div>
+      <div class="facility-item">
+        <div class="facility-icon">👥</div>
+        <h4>Clases Grupales</h4>
+        <p>Spin, HIIT, Boxeo, Zumba, Pilates, Yoga - Diferentes horarios cada día</p>
+      </div>
+      <div class="facility-item">
+        <div class="facility-icon">💬</div>
+        <h4>Coaching Profesional</h4>
+        <p>Entrenadores certificados y nutricionistas disponibles para atención personalizada</p>
       </div>
     </div>
 
-    <!-- 🎉 MENSAJE DE DESCUENTO: Se muestra si viene con descuento de Jalamburguers -->
-    <div id="discountMessage" style="margin-top: 32px; padding: 24px; background: rgba(16, 185, 129, 0.15); border: 2px solid var(--color-accent); border-radius: var(--border-radius); text-align: center; display: none;">
-      <h3 style="color: var(--color-accent); margin-top: 0;">🎉 ¡Descuento Especial Activo!</h3>
-      <p id="discountText" style="margin: 0; font-size: 1.125rem; font-weight: 600; color: var(--color-accent);"></p>
-      <p style="margin-top: 12px; font-size: 0.875rem; color: var(--color-text-light);">El descuento se aplicará automáticamente al finalizar la compra</p>
+    <!-- GALERÍA DE FOTOS -->
+    <h3 style="margin-top: 60px; margin-bottom: 40px; text-align: center; font-size: 2rem;">Galería de Nuestras Instalaciones</h3>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg" alt="Pesas">
+        <div class="gallery-caption">Sala de Pesas Profesional</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg" alt="CrossFit">
+        <div class="gallery-caption">Zona Funcional y CrossFit</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.pexels.com/photos/3838633/pexels-photo-3838633.jpeg" alt="Cardio">
+        <div class="gallery-caption">Centro de Cardio Moderno</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.pexels.com/photos/3621617/pexels-photo-3621617.jpeg" alt="Yoga">
+        <div class="gallery-caption">Área de Yoga y Bienestar</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.pexels.com/photos/3807513/pexels-photo-3807513.jpeg" alt="Clases">
+        <div class="gallery-caption">Clases Grupales Dinámicas</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.pexels.com/photos/3838330/pexels-photo-3838330.jpeg" alt="Vestuarios">
+        <div class="gallery-caption">Vestuarios Completos</div>
+      </div>
     </div>
   </section>
-  
-  <!-- BENEFITS SECTION -->
+
+  <!-- PLANES SECTION -->
+  <section id="plans" class="container">
+    <h2>💳 Planes de Membresía - Elige Tu Camino</h2>
+    <p class="muted">Descubre el plan perfecto para tus objetivos fitness</p>
+
+    <div class="plans-grid-expanded">
+      <!-- PLAN 1: BÁSICO -->
+      <div class="plan-card-expanded">
+        <h3 class="plan-name">Básico</h3>
+        <div class="plan-price">
+          29€
+          <small>/mes</small>
+        </div>
+        <div class="plan-duration">✨ Acceso ilimitado a todas las instalaciones</div>
+        <ul class="plan-features">
+          <li>Acceso 24/7 a todas las áreas</li>
+          <li>Vestuarios y duchas completas</li>
+          <li>Casilleros seguros</li>
+          <li>Gimnasio completo sin restricciones</li>
+          <li>5 descuentos Jalamburguers/mes</li>
+        </ul>
+        <button class="btn plan-cta" onclick="selectPlan('Basico')">Seleccionar Plan</button>
+      </div>
+
+      <!-- PLAN 2: PLUS -->
+      <div class="plan-card-expanded">
+        <div class="plan-badge">POPULAR</div>
+        <h3 class="plan-name">Plus</h3>
+        <div class="plan-price">
+          49€
+          <small>/mes</small>
+        </div>
+        <div class="plan-duration">⭐ Acceso completo + clases ilimitadas</div>
+        <ul class="plan-features">
+          <li>Todo del Plan Básico</li>
+          <li>Clases grupales ilimitadas</li>
+          <li>Asesoría nutricional (1 sesión/mes)</li>
+          <li>2 sesiones de entrenamiento personal</li>
+          <li>Aplicación con rutinas personalizadas</li>
+          <li>10 descuentos Jalamburguers/mes</li>
+        </ul>
+        <button class="btn plan-cta" onclick="selectPlan('Plus')">Seleccionar Plan</button>
+      </div>
+
+      <!-- PLAN 3: PREMIUM - FEATURED -->
+      <div class="plan-card-expanded featured">
+        <div class="plan-badge">MEJOR ATRACCIÓN</div>
+        <h3 class="plan-name">Premium</h3>
+        <div class="plan-price">
+          79€
+          <small>/mes</small>
+        </div>
+        <div class="plan-duration">👑 Experiencia completa con entrenador personal</div>
+        <ul class="plan-features">
+          <li>Todo del Plan Plus</li>
+          <li>4 sesiones de entrenamiento personal/mes</li>
+          <li>Plan nutricional personalizado</li>
+          <li>Análisis corporal y composición mensual</li>
+          <li>Reserva prioritaria de clases</li>
+          <li>Acceso a zona privada VIP</li>
+          <li>15 descuentos Jalamburguers/mes</li>
+        </ul>
+        <button class="btn plan-cta" onclick="selectPlan('Premium')">Seleccionar Plan</button>
+      </div>
+
+      <!-- PLAN 4: ELITE -->
+      <div class="plan-card-expanded">
+        <div class="plan-badge">LUXURY</div>
+        <h3 class="plan-name">Elite</h3>
+        <div class="plan-price">
+          119€
+          <small>/mes</small>
+        </div>
+        <div class="plan-duration">💎 Experiencia premium sin límites</div>
+        <ul class="plan-features">
+          <li>Todo del Plan Premium</li>
+          <li>Entrenador personal dedicado (8 sesiones/mes)</li>
+          <li>Sesiones de recuperación (sauna, masaje)</li>
+          <li>Suplementación gratuita</li>
+          <li>Eventos y competiciones privados</li>
+          <li>Servicio concierge personalizado</li>
+          <li>25 descuentos Jalamburguers/mes</li>
+        </ul>
+        <button class="btn plan-cta" onclick="selectPlan('Elite')">Seleccionar Plan</button>
+      </div>
+
+      <!-- PLAN 5: GRUPO -->
+      <div class="plan-card-expanded">
+        <div class="plan-badge">GRUPO</div>
+        <h3 class="plan-name">Grupo (3-5)</h3>
+        <div class="plan-price">
+          22€
+          <small>/pers/mes</small>
+        </div>
+        <div class="plan-duration">👫 Descuento grupal - Ahorra 25%</div>
+        <ul class="plan-features">
+          <li>Acceso completo 24/7</li>
+          <li>Todas las clases grupales</li>
+          <li>2 sesiones de entrenador/mes</li>
+          <li>Ahorran 25% vs plan individual</li>
+          <li>Motivación con tu comunidad</li>
+          <li>8 descuentos Jalamburguers/pers</li>
+        </ul>
+        <button class="btn plan-cta" onclick="selectPlan('Grupo')">Seleccionar Plan</button>
+      </div>
+
+      <!-- PLAN 6: CLASE ÚNICA -->
+      <div class="plan-card-expanded">
+        <h3 class="plan-name">Clase Única</h3>
+        <div class="plan-price">
+          12€
+          <small>/clase</small>
+        </div>
+        <div class="plan-duration">🆓 Prueba sin compromiso</div>
+        <ul class="plan-features">
+          <li>Acceso a cualquier clase grupal</li>
+          <li>Uso de vestuarios y duchas</li>
+          <li>Válido por 30 días</li>
+          <li>Sin obligación de membresía</li>
+          <li>Asesor personal disponible</li>
+          <li>1 descuento Jalamburguers</li>
+        </ul>
+        <button class="btn plan-cta" onclick="selectPlan('ClaseUnica')">Seleccionar Plan</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
   <section class="container">
-    <h2>✨ ¿Por qué elegir JalFits?</h2>
-    <div class="grid cards">
-      <div class="card">
-        <h3>🏋️ Instalaciones Modernas</h3>
-        <p>Equipamiento de última generación, máquinas nuevas y espacios amplios para tu comodidad.</p>
+    <h2>⭐ Lo que dicen nuestros miembros</h2>
+    <p class="muted">Historias reales de transformación y éxito</p>
+    <div class="testimonials">
+      <div class="testimonial">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-quote">
+          "Llevo 10 meses aquí y mi vida cambió completamente. Los entrenadores son increíbles, me enseñaron técnica correcta, los descuentos con Jalamburguers hacen que entrenar sea parte de mi estilo de vida saludable. 100% recomendado."
+        </div>
+        <div class="testimonial-author">María García López</div>
+        <div class="testimonial-title">Miembro Plan Premium desde hace 10 meses</div>
       </div>
-      <div class="card">
-        <h3>👥 Clases Grupales</h3>
-        <p>Aeróbic, yoga, pilates, spinning y más. Clases a diferentes horas del día.</p>
+
+      <div class="testimonial">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-quote">
+          "Mejor decisión que tomé. Equipo moderno, entrenadoresExcelentes, ambiente familiar y motivador. Las clases grupales son lo mejor, me hizo crearme una comunidad de amigos aquí. La integración con Jalamburguers es perfecta."
+        </div>
+        <div class="testimonial-author">Carlos Rodríguez Silva</div>
+        <div class="testimonial-title">Miembro Plan Elite desde hace 1 año</div>
       </div>
-      <div class="card">
-        <h3>🤝 Comunidad Activa</h3>
-        <p>Únete a una comunidad de deportistas comprometidos. Eventos y competiciones mensuales.</p>
+
+      <div class="testimonial">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-quote">
+          "Finalmente encontré un gimnasio donde no es solo máquinas, sino comunidad. Las clases de yoga me relajan después de entrenar fuerte. Me encanta venir a entrenar antes o después de comer en Jalamburguers. La experiencia es única."
+        </div>
+        <div class="testimonial-author">Sofía Martinéz Sánchez</div>
+        <div class="testimonial-title">Miembro Plan Plus desde hace 6 meses</div>
       </div>
-      <div class="card">
-        <h3>🍔 Partnership con Jalamburguers</h3>
-        <p>Obtén descuentos especiales en comidas saludables. Comida y entrenamiento en un lugar.</p>
+    </div>
+  </section>
+
+  <!-- VIDEOS SECTION -->
+  <section class="container">
+    <h2>📹 Inspiración • Motivación • Transformación</h2>
+    <p class="muted">Mira cómo nuestros miembros transforman sus cuerpos y vidas</p>
+    
+    <div class="video-grid">
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/szYq2ar3QR8" allowfullscreen></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/H8TOebC-yqE" allowfullscreen></iframe>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/6fxgvR9J1_8" allowfullscreen></iframe>
       </div>
     </div>
   </section>
@@ -133,35 +919,34 @@
   <section id="contact" class="container">
     <div class="about">
       <h2>📍 Ubicación y Contacto</h2>
-      
       <div class="contact">
         <div>
-          <h4>Dirección</h4>
-          <p>C/ Ejemplo 123<br>Ciudad, 12345</p>
+          <h4>📍 Dirección</h4>
+          <p><strong>Calle Gimnasia 42<br>Suite 200<br>Centro de la Ciudad</strong></p>
         </div>
         <div>
-          <h4>Teléfono</h4>
-          <p><a href="tel:+34600000000" style="color: var(--color-accent); text-decoration: none;">+34 600 000 000</a></p>
+          <h4>📞 Teléfono</h4>
+          <p><strong>+34 600 222 333</strong><br><small>Llamadas de 9:00 - 22:00</small></p>
         </div>
         <div>
-          <h4>Email</h4>
-          <p><a href="mailto:info@jalfits.example" style="color: var(--color-accent); text-decoration: none;">info@jalfits.example</a></p>
+          <h4>📧 Email</h4>
+          <p><strong>info@jalfits.local</strong><br><small>Respuesta en 24 horas</small></p>
         </div>
         <div>
-          <h4>Horario</h4>
-          <p>Lun-Vie: 06:00 — 23:00<br>Sáb-Dom: 08:00 — 22:00</p>
+          <h4>🕐 Horario</h4>
+          <p><strong>L-V:</strong> 6:00 - 23:00<br><strong>Sábado:</strong> 8:00 - 22:00<br><strong>Domingo:</strong> 9:00 - 20:00</p>
         </div>
       </div>
 
-      <!-- 📸 MAPA: Agregar aquí tu mapa -->
-      <!-- Opción 1: Google Maps -->
-      <!-- <iframe src="https://www.google.com/maps/embed?pb=..." width="100%" height="450" style="border:0; border-radius: 12px; margin-top: 24px;" allowfullscreen="" loading="lazy"></iframe> -->
-      
-      <!-- Opción 2: Imagen de mapa -->
-      <!-- <img src="images/gym-map.jpg" alt="Mapa de ubicación JalFits" style="width: 100%; border-radius: 12px; margin-top: 24px;"> -->
-      
-      <div style="margin-top: 24px; background: var(--color-border); border-radius: var(--border-radius); padding: 40px; text-align: center; color: var(--color-text-light);">
-        <p>🗺️ Aquí va tu mapa (Google Maps, Leaflet, etc.)</p>
+      <div style="margin-top: 40px; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05)); border-radius: 16px; padding: 48px; text-align: center; color: var(--color-text); border: 2px solid rgba(16, 185, 129, 0.2);">
+        <p style="margin: 0; font-size: 1.1rem; font-weight: 600;">📍 [Google Maps - Tu ubicación aquí]</p>
+        <p style="margin-top: 12px; font-size: 0.9rem; color: var(--color-text-light);">Integración con Google Maps disponible pronto</p>
+      </div>
+
+      <div style="margin-top: 48px; text-align: center;">
+        <h3 style="color: #10b981; margin-bottom: 20px; font-size: 1.8rem;">¿Quieres visitarnos?</h3>
+        <p style="font-size: 1.05rem; color: var(--color-text-light); line-height: 1.8;">Ven a conocer JalFits sin compromiso. Prueba una clase gratis, conoce a nuestros entrenadores y descubre cómo podemos ayudarte a alcanzar tus objetivos.</p>
+        <a href="jalfits-register.html" class="btn" style="margin-top: 28px;">Solicitar Visita Guiada Gratis</a>
       </div>
     </div>
   </section>
@@ -172,11 +957,9 @@
      =================================================================== -->
 <footer class="site-footer">
   <div class="container footer-grid">
-    <div style="display: flex; align-items: center; gap: 16px;">
-      <div>
-        <h4>JalFits</h4>
-        <p>Tu gimnasio local con planes accesibles y ambiente de comunidad.</p>
-      </div>
+    <div>
+      <h4>JalFits</h4>
+      <p>Tu gimnasio local con planes accesibles y comunidad vibrante.</p>
     </div>
     <div>
       <h4>Síguenos</h4>
@@ -190,14 +973,14 @@
       <h4>Enlaces</h4>
       <p>
         <a href="index.html">Jalamburguers</a> • 
-        <a href="#" onclick="openModal('privacyModal'); return false;">Política de privacidad</a> • 
-        <a href="#" onclick="openModal('termsModal'); return false;">Términos de servicio</a>
+        <a href="privacy-gym.html">Privacidad</a> • 
+        <a href="terms-gym.html">Términos</a>
       </p>
     </div>
   </div>
   <div class="container" style="text-align: center; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 24px;">
     <p style="margin: 0; font-size: 0.875rem; color: rgba(255, 255, 255, 0.6);">
-      © 2026 JalFits • Todos los derechos reservados | Asociado de Jalamburguers
+      © 2026 JalFits • Todos los derechos reservados
     </p>
   </div>
 </footer>
@@ -205,250 +988,51 @@
 <!-- ===================================================================
      SCRIPTS
      =================================================================== -->
+<script src="js/icons.js"></script>
 <script src="js/notifications.js"></script>
 <script src="js/cookies.js"></script>
 <script src="js/auth.js"></script>
+<script src="js/main.js"></script>
 
 <script>
-const GYM_PLANS = {
-  mensual: { price: 30, name: 'Plan Mensual' },
-  trimestral: { price: 75, name: 'Plan Trimestral' }
-};
+// Carrusel de fotos fullscreen
+let currentSlide = 0;
+const slides = document.querySelectorAll('.carousel-slide');
+const buttons = document.querySelectorAll('.carousel-btn');
 
-let activeDiscount = null;
-
-function enrollGymPlan(plan, originalPrice) {
-  let finalPrice = originalPrice;
-  let discountMessage = '';
-
-  if (activeDiscount) {
-    finalPrice = originalPrice * 0.7;
-    discountMessage = ` (Descuento 30%: ${originalPrice}€ → ${finalPrice.toFixed(2)}€)`;
-  }
-
-  const message = `${GYM_PLANS[plan].name} seleccionado${discountMessage}. Contacta con nosotros para completar tu registro.`;
-  notificationManager.success('¡Gracias!', message);
+function showSlide(n) {
+  slides[currentSlide].classList.remove('active');
+  buttons[currentSlide].classList.remove('active');
+  
+  currentSlide = (n + slides.length) % slides.length;
+  
+  slides[currentSlide].classList.add('active');
+  buttons[currentSlide].classList.add('active');
 }
 
-function enrollPlan(plan) {
-  // Show a confirmation toast, then redirect to the dedicated registration page
-  const originalPrice = GYM_PLANS[plan]?.price || 0;
-  const finalPrice = activeDiscount ? (originalPrice * 0.7) : originalPrice;
-  const discountMessage = activeDiscount ? ` (Descuento 30%: ${originalPrice}€ → ${finalPrice.toFixed(2)}€)` : '';
-  const message = `${GYM_PLANS[plan].name} seleccionado${discountMessage}. Abriendo formulario de registro...`;
+function carouselNext() {
+  showSlide(currentSlide + 1);
+}
 
-  if (typeof notificationManager !== 'undefined') {
-    notificationManager.success('¡Gracias!', message);
-  }
+function carouselPrev() {
+  showSlide(currentSlide - 1);
+}
 
-  const params = new URLSearchParams({ plan, price: finalPrice.toString(), discount: activeDiscount ? '1' : '0' });
+function carouselGoTo(n) {
+  showSlide(n);
+}
+
+// Auto-advance carousel every 6 seconds
+setInterval(() => {
+  carouselNext();
+}, 6000);
+
+// Seleccionar plan
+function selectPlan(planName) {
+  notificationManager.success('¡Plan seleccionado!', `Has elegido el plan ${planName}. Redirigiendo al registro...`);
   setTimeout(() => {
-    window.location.href = `jalfits-register.html?${params.toString()}`;
-  }, 900);
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  if (localStorage.getItem('gymDiscount') === 'true') {
-    activeDiscount = true;
-    
-    const messageDiv = document.getElementById('discountMessage');
-    const messageText = document.getElementById('discountText');
-    const priceMonthly = document.getElementById('price-monthly');
-    const priceQuarterly = document.getElementById('price-quarterly');
-    const discountLabelMonthly = document.getElementById('discount-label-monthly');
-    const discountLabelQuarterly = document.getElementById('discount-label-quarterly');
-    
-    messageDiv.style.display = 'block';
-    messageText.innerText = 'Descuento del 30% aplicado gracias a Jalamburguers 💪';
-    
-    const monthlyDiscount = (30 * 0.7).toFixed(2);
-    const quarterlyDiscount = (75 * 0.7).toFixed(2);
-    
-    priceMonthly.innerHTML = `<span style="text-decoration: line-through; opacity: 0.6;">30€</span> ${monthlyDiscount}€`;
-    priceQuarterly.innerHTML = `<span style="text-decoration: line-through; opacity: 0.6;">75€</span> ${quarterlyDiscount}€`;
-    
-    discountLabelMonthly.style.display = 'block';
-    discountLabelMonthly.textContent = '⚡ 30% de descuento aplicado';
-    discountLabelQuarterly.textContent = '⚡ Ahorra 15% + 30% descuento = 40.5%';
-    
-    localStorage.removeItem('gymDiscount');
-    
-    notificationManager.success('¡Descuento de JalFits!', 'Tienes 30% de descuento en tu membresía');
-  }
-});
-
-// --- Card lookup UI: permite ingresar código de tarjeta y ver tiempo restante ---
-function renderCardLookup() {
-  const container = document.createElement('div');
-  container.id = 'card-lookup-container';
-  container.style.marginTop = '32px';
-  container.innerHTML = `
-    <h3>🔑 ¿Tienes una tarjeta física de JalFits?</h3>
-    <p class="muted">Introduce el código de tu tarjeta para ver cuánto tiempo queda en tu plan.</p>
-    <div style="display:flex; gap:8px; align-items:center; margin-top:12px;">
-      <input id="card-code-input" type="text" placeholder="Código de tarjeta (p.ej. JAL-1234-ABCD)" style="padding:8px; flex:1; border-radius:6px; border:1px solid rgba(255,255,255,0.08); background:transparent; color:inherit;">
-      <button class="btn" onclick="checkGymCard()">Comprobar</button>
-    </div>
-    <div id="card-check-result" style="margin-top:16px;"></div>
-  `;
-
-  const plansSection = document.getElementById('plans');
-  if (plansSection) plansSection.parentNode.insertBefore(container, plansSection.nextSibling);
-}
-
-function checkGymCard() {
-  const code = document.getElementById('card-code-input').value.trim();
-  const result = document.getElementById('card-check-result');
-  result.innerHTML = '';
-  if (!code) {
-    notificationManager.error('Código vacío', 'Introduce el código de tu tarjeta.');
-    return;
-  }
-
-  // Lookup in localStorage (gym_cards)
-  const raw = localStorage.getItem('gym_cards');
-  if (!raw) {
-    result.innerHTML = '<p class="muted">No se han encontrado tarjetas registradas en este navegador.</p>';
-    return;
-  }
-
-  let cards = [];
-  try { cards = JSON.parse(raw) || []; } catch(e) { cards = []; }
-
-  const card = cards.find(c => c.code === code);
-  if (!card) {
-    result.innerHTML = `<p class="muted">Código no encontrado. ¿Seguiste correctamente el proceso de registro?</p>`;
-    notificationManager.error('Código no válido', 'No se ha encontrado la tarjeta.');
-    return;
-  }
-
-  // Calcular tiempo restante
-  const now = new Date();
-  const expiry = new Date(card.expiryDate);
-  const diffMs = expiry - now;
-  if (diffMs <= 0) {
-    result.innerHTML = `<div class="card"><h4>Tarjeta: ${card.code}</h4><p>Plan: ${card.plan} — Expirado el ${expiry.toLocaleDateString()}</p><p style="color:var(--color-accent);">Renovación necesaria</p></div>`;
-    notificationManager.warning('Plan caducado', 'Tu membresía ha expirado. Renovar para volver a usar el gimnasio.');
-    return;
-  }
-
-  const daysLeft = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
-  result.innerHTML = `
-    <div class="card">
-      <h4>Tarjeta: ${card.code}</h4>
-      <p>Titular: ${card.name} — DNI: ${card.dni}</p>
-      <p>Plan: ${card.plan}</p>
-      <p>Vence el: ${expiry.toLocaleDateString()} — <strong>${daysLeft} días restantes</strong></p>
-    </div>
-  `;
-  notificationManager.success('Tarjeta válida', `Quedan ${daysLeft} días en tu plan.`);
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  renderCardLookup();
-});
-</script>
-
-<!-- ===================================================================
-     MODALES - POLÍTICA Y TÉRMINOS
-     =================================================================== -->
-<!-- Modal Política de Privacidad -->
-<div id="privacyModal" class="modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h2>Política de Privacidad</h2>
-      <span class="close" onclick="closeModal('privacyModal')">&times;</span>
-    </div>
-    <div class="modal-body">
-      <p><strong>Última actualización:</strong> 2026</p>
-      
-      <h3>1. Introducción</h3>
-      <p>JalFits respeta tu privacidad y se compromete a proteger tus datos personales. Esta política de privacidad explica cómo recopilamos, utilizamos y protegemos tu información.</p>
-      
-      <h3>2. Información que Recopilamos</h3>
-      <p>Recopilamos información que nos proporcionas directamente, incluyendo:</p>
-      <ul>
-        <li>Nombre, edad y datos personales</li>
-        <li>Número de DNI</li>
-        <li>Información de membresía</li>
-        <li>Datos de pago</li>
-      </ul>
-      
-      <h3>3. Uso de la Información</h3>
-      <p>Utilizamos tu información para:</p>
-      <ul>
-        <li>Procesar tu membresía de gimnasio</li>
-        <li>Gestionar tu cuenta de usuario</li>
-        <li>Enviar actualizaciones sobre renovaciones y promociones</li>
-        <li>Mejorar nuestros servicios</li>
-      </ul>
-      
-      <h3>4. Protección de Datos</h3>
-      <p>Implementamos medidas de seguridad técnicas y organizativas para proteger tus datos contra acceso no autorizado, alteración o destrucción.</p>
-      
-      <h3>5. Derechos del Usuario</h3>
-      <p>Tienes derecho a acceder, corregir o eliminar tus datos personales. Contacta con nosotros en: info@jalfits.example</p>
-      
-      <h3>6. Cambios en esta Política</h3>
-      <p>Nos reservamos el derecho a actualizar esta política de privacidad. Te notificaremos de cambios significativos.</p>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Términos de Servicio -->
-<div id="termsModal" class="modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h2>Términos de Servicio</h2>
-      <span class="close" onclick="closeModal('termsModal')">&times;</span>
-    </div>
-    <div class="modal-body">
-      <p><strong>Última actualización:</strong> 2026</p>
-      
-      <h3>1. Aceptación de Términos</h3>
-      <p>Al acceder y utilizar JalFits, aceptas quedar vinculado por estos términos y condiciones.</p>
-      
-      <h3>2. Uso del Servicio</h3>
-      <p>JalFits proporciona acceso a instalaciones de gimnasio de calidad. Nos reservamos el derecho a modificar o suspender el servicio en cualquier momento.</p>
-      
-      <h3>3. Membresía</h3>
-      <p>Las membresías están disponibles en diferentes planes: mensual, trimestral, etc. El acceso se proporciona mediante tarjeta física o digital.</p>
-      
-      <h3>4. Pago y Renovación</h3>
-      <p>Los pagos deben realizarse según los términos acordados. Los planes se renuevan automáticamente a menos que canceles antes de la fecha de vencimiento.</p>
-      
-      <h3>5. Condiciones de Uso del Gimnasio</h3>
-      <p>Los miembros aceptan cumplir con todas las normas del gimnasio, incluyendo comportamiento respetuoso, uso adecuado de equipos y mantenimiento de la limpieza.</p>
-      
-      <h3>6. Limitación de Responsabilidad</h3>
-      <p>JalFits no será responsable por lesiones personales, pérdida de objetos personales o daños derivados del uso de nuestras instalaciones.</p>
-      
-      <h3>7. Cancelación</h3>
-      <p>Puedes cancelar tu membresía con 30 días de aviso. Los pagos no son reembolsables.</p>
-      
-      <h3>8. Contacto</h3>
-      <p>Para consultas sobre estos términos, contacta con: info@jalfits.example</p>
-    </div>
-  </div>
-</div>
-
-<script>
-function openModal(modalId) {
-  document.getElementById(modalId).classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal(modalId) {
-  document.getElementById(modalId).classList.remove('active');
-  document.body.style.overflow = 'auto';
-}
-
-// Cerrar modal si se hace click fuera de él
-window.onclick = function(event) {
-  if (event.target.classList.contains('modal')) {
-    event.target.classList.remove('active');
-    document.body.style.overflow = 'auto';
-  }
+    window.location.href = 'jalfits-register.html?plan=' + planName;
+  }, 1500);
 }
 </script>
 

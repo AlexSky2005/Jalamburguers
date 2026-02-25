@@ -3,9 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Jalamburguers - Comida saludable con estrago de puntos. Entrena, come bien y ahorra.">
+  <meta name="description" content="Jalamburguers - Comida saludable con sistema de puntos. Entrena, come bien y ahorra.">
   <title>Jalamburguers - Burgers Fit & Recompensas</title>
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* === MENÚ DESPLEGABLE === */
+    .menu-dropdown-btn {
+      background: linear-gradient(135deg, #ff6b6b 0%, #c92a2a 100%);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      margin: 6px;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .menu-dropdown-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+    }
+
+    .menu-dropdown-btn.active {
+      background: linear-gradient(135deg, #ff8800 0%, #ff6b6b 100%);
+    }
+
+    .menu-container {
+      margin: 40px 0;
+    }
+
+    .menu-category {
+      display: none;
+    }
+
+    .menu-category.active {
+      display: block;
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .category-title {
+      font-size: 1.8rem;
+      color: #ff6b6b;
+      margin: 30px 0 20px 0;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+  </style>
 </head>
 <body>
 
@@ -19,7 +82,6 @@
   </video>
   <div class="hero-overlay"></div>
 
-  <!-- LOGO CIRCULAR en esquina superior derecha (120x120px) -->
   <img src="images/logo1.png" alt="Logo Jalamburguers" class="logo-circular-top-right">
 
   <div class="container">
@@ -29,15 +91,14 @@
       </a>
       <nav class="main-nav">
         <a href="#products">PRODUCTOS</a>
-        <a href="#rewards">RECOMPENSAS CON PUNTOS</a>
+        <a href="#rewards">RECOMPENSAS</a>
         <a href="#about">SOBRE</a>
         <a href="jalfits.html">JALFITS 💪</a>
-        <a href="#" id="auth-btn" class="btn ghost" style="border: none; background: transparent; color: var(--color-white); padding: 0; margin: 0;">🔐 Iniciar Sesión</a>
+        <a href="#" id="auth-btn" class="btn">🔐 Iniciar Sesión</a>
       </nav>
     </nav>
 
     <div class="hero-inner">
-      <!-- LOGO HORIZONTAL - Ocupa todo el recuadro amarillo (ancho 100%, alto 200px) -->
       <div class="logo-horizontal-banner">
         <img src="images/logo2.png" alt="Jalamburguers Horizontal">
         <div class="banner-text">
@@ -45,7 +106,7 @@
         </div>
       </div>
       <div class="hero-actions">
-        <a href="#products" class="btn">Ver burgers</a>
+        <a href="#products" class="btn">Ver menú</a>
         <a href="#rewards" class="btn ghost">Ver recompensas</a>
       </div>
     </div>
@@ -60,15 +121,15 @@
   <section class="container">
     <div class="metrics">
       <div>
-        <h3>Puntos</h3>
+        <h3>🎁 Puntos</h3>
         <span id="points">0</span>
       </div>
       <div>
-        <h3>Compras</h3>
+        <h3>🛍️ Compras</h3>
         <span id="purchases">0</span>
       </div>
       <div>
-        <h3>Gasto total</h3>
+        <h3>💰 Gasto total</h3>
         <span id="revenue">0€</span>
       </div>
     </div>
@@ -76,93 +137,582 @@
 
   <!-- PRODUCTS SECTION -->
   <section id="products" class="container">
-    <h2>🍔 Burgers Fit</h2>
-    <p class="muted">Ingredientes saludables, diseñadas para deportistas que no quieren sacrificar sabor.</p>
+    <h2>🍔 Nuestro Menú - Ingredientes Premium</h2>
+    <p class="muted">Comida saludable diseñada para deportistas que no sacrifican el sabor</p>
     
-    <div class="grid cards">
-      <!-- 📷 BURGER 1: Reemplazar el div con una tarjeta con imagen -->
-      <!-- Opción: Agregar <img src="images/burger1.jpg" alt="JalBurger Proteica" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 12px;"> -->
-      <div class="card">
-        <h3>JalBurger Proteica</h3>
-        <p>Carne magra de res + pan integral + tomate fresco + lechuga</p>
-        <p class="price">8€</p>
-        <button class="btn" onclick="openCheckout()">Comprar — +10 pts</button>
+    <!-- MENÚ DESPLEGABLE -->
+    <div style="text-align: center; margin: 40px 0; display: flex; flex-wrap: wrap; justify-content: center;">
+      <button class="menu-dropdown-btn active" onclick="showCategory('burgers')">
+        🍔 Hamburguesas
+      </button>
+      <button class="menu-dropdown-btn" onclick="showCategory('platos')">
+        🍽️ Platos Combinados
+      </button>
+      <button class="menu-dropdown-btn" onclick="showCategory('entrantes')">
+        🥗 Entrantes
+      </button>
+      <button class="menu-dropdown-btn" onclick="showCategory('bebidas')">
+        🥤 Bebidas
+      </button>
+      <button class="menu-dropdown-btn" onclick="showCategory('postres')">
+        🍰 Postres
+      </button>
+      <button class="menu-dropdown-btn" onclick="showCategory('menus')">
+        📦 Menús
+      </button>
+    </div>
+
+    <!-- CONTENEDOR DE CATEGORÍAS -->
+    <div class="menu-container">
+      <!-- HAMBURGUESAS -->
+      <div id="burgers" class="menu-category active">
+        <h3 class="category-title">🍔 Hamburguesas Premium</h3>
+        <div class="products-grid">
+          <!-- BURGER 1 -->
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg" alt="JalBurger Proteica">
+              <span class="badge">BESTSELLER</span>
+            </div>
+            <h3>JalBurger Proteica</h3>
+            <p>Carne 100% res + queso cheddar + lechuga + tomate + salsa especial proteica</p>
+            <p class="price">8€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +10 pts</button>
+          </div>
+
+          <!-- BURGER 2 -->
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg" alt="JalVegan Power">
+              <span class="badge">VEGAN</span>
+            </div>
+            <h3>JalVegan Power</h3>
+            <p>Patty de lentejas y quinoa + aguacate + brotes frescos + pan integral tostado</p>
+            <p class="price">7€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +9 pts</button>
+          </div>
+
+          <!-- BURGER 3 -->
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg" alt="Chicken Boost">
+              <span class="badge">PREMIUM</span>
+            </div>
+            <h3>Chicken Boost</h3>
+            <p>Pechuga de pollo a la brasa + aguacate + cebolla caramelizada + salsa BBQ light</p>
+            <p class="price">9€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +11 pts</button>
+          </div>
+
+          <!-- BURGER 4 -->
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg" alt="BBQ Fit">
+              <span class="badge">PICANTE</span>
+            </div>
+            <h3>BBQ Fit</h3>
+            <p>Carne ahumada + bacon crujiente + jalapeños + queso fundido + salsa BBQ</p>
+            <p class="price">8.50€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +11 pts</button>
+          </div>
+
+          <!-- BURGER 5 -->
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg" alt="Mediterranean">
+              <span class="badge">MEDITERRÁNEO</span>
+            </div>
+            <h3>Mediterranean Burger</h3>
+            <p>Carne de res + feta + tomate seco + aceitunas + yogur griego + almendras</p>
+            <p class="price">10€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +13 pts</button>
+          </div>
+
+          <!-- BURGER 6 -->
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg" alt="Triple Stack">
+              <span class="badge">DELUXE</span>
+            </div>
+            <h3>Triple Stack Deluxe</h3>
+            <p>3 patties de carne + doble queso + bacon + huevo frito + setas salteadas</p>
+            <p class="price">12€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +15 pts</button>
+          </div>
+
+          <!-- BURGER 7 -->
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg" alt="Mushroom Magic">
+              <span class="badge">VEGGIE</span>
+            </div>
+            <h3>Mushroom Magic</h3>
+            <p>Setas portobello a la parrilla + queso de cabra + cebollino + lechuga</p>
+            <p class="price">8€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +10 pts</button>
+          </div>
+
+          <!-- BURGER 8 -->
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg" alt="Spicy Thai">
+              <span class="badge">ASIÁTICA</span>
+            </div>
+            <h3>Spicy Thai Burger</h3>
+            <p>Carne de res + especias tailandesas + sriracha + cebolla crujiente + cilantro</p>
+            <p class="price">8.50€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +11 pts</button>
+          </div>
+        </div>
       </div>
 
-      <!-- 📷 BURGER 2: Reemplazar el div con una tarjeta con imagen -->
-      <!-- Opción: Agregar <img src="images/burger2.jpg" alt="JalVegan Power" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 12px;"> -->
-      <div class="card">
-        <h3>JalVegan Power</h3>
-        <p>Tofu marinado + espinaca + aguacate + salsa de tahini</p>
-        <p class="price">7€</p>
-        <button class="btn" onclick="openCheckout()">Comprar — +8 pts</button>
+      <!-- PLATOS COMBINADOS -->
+      <div id="platos" class="menu-category">
+        <h3 class="category-title">🍽️ Platos Combinados</h3>
+        <div class="products-grid">
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg" alt="Combo Power">
+              <span class="badge">BESTSELLER</span>
+            </div>
+            <h3>Combo Power</h3>
+            <p>Hamburguesa + papas caseras + bebida + postre + puntos extra</p>
+            <p class="price">18€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +22 pts</button>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg" alt="Combo Premium">
+              <span class="badge">VIP</span>
+            </div>
+            <h3>Combo Premium</h3>
+            <p>2 Burgers + papas + 2 bebidas + 2 postres + zona VIP</p>
+            <p class="price">28€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +35 pts</button>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg" alt="Combo Fit">
+              <span class="badge">LIGERO</span>
+            </div>
+            <h3>Combo Fit</h3>
+            <p>Burger light + ensalada + bebida proteica + fruta fresca</p>
+            <p class="price">14€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +17 pts</button>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg" alt="Combo Vegan">
+              <span class="badge">VEGAN</span>
+            </div>
+            <h3>Combo Vegan Deluxe</h3>
+            <p>Burger vegan + papas + bebida refrescante + postre vegan</p>
+            <p class="price">15€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +18 pts</button>
+          </div>
+        </div>
       </div>
 
-      <!-- 📷 BURGER 3: Reemplazar el div con una tarjeta con imagen -->
-      <!-- Opción: Agregar <img src="images/burger3.jpg" alt="Chicken Boost" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 12px;"> -->
-      <div class="card">
-        <h3>Chicken Boost</h3>
-        <p>Pollo grill + aguacate + queso mozzarella + pan tostado</p>
-        <p class="price">9€</p>
-        <button class="btn" onclick="openCheckout()">Comprar — +12 pts</button>
+      <!-- ENTRANTES -->
+      <div id="entrantes" class="menu-category">
+        <h3 class="category-title">🥗 Entrantes & Acompañamientos</h3>
+        <div class="products-grid">
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/3621617/pexels-photo-3621617.jpeg" alt="Papas Caseras">
+              <span class="badge">CASERO</span>
+            </div>
+            <h3>Papas Caseras Fit</h3>
+            <p>Papas al horno con sal marina y especias saludables</p>
+            <p class="price">3.50€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +4 pts</button>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/6900055/pexels-photo-6900055.jpeg" alt="Ensalada">
+              <span class="badge">VEGETAL</span>
+            </div>
+            <h3>Ensalada Premium Mix</h3>
+            <p>Lechuga, espinaca, tomate, pepino, zanaoria, vinagreta balsamica</p>
+            <p class="price">5€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +6 pts</button>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/821365/pexels-photo-821365.jpeg" alt="Guacam ole">
+              <span class="badge">PREMIUM</span>
+            </div>
+            <h3>Guacamole Artesanal</h3>
+            <p>Aguacate fresco + limón + cilantro + cebolla + tomate + sal marina</p>
+            <p class="price">4.50€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +5 pts</button>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/5632399/pexels-photo-5632399.jpeg" alt="Hummus">
+              <span class="badge">VEGAN</span>
+            </div>
+            <h3>Hummus Premium</h3>
+            <p>Garbanzos + tahini + limón + ajo + aceite de oliva extra virgen</p>
+            <p class="price">4€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +5 pts</button>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg" alt="Aros de Cebolla">
+              <span class="badge">CRUJIENTE</span>
+            </div>
+            <h3>Aros de Cebolla Fit</h3>
+            <p>Cebolla freída con masa integral con aire frito saludable</p>
+            <p class="price">3€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +4 pts</button>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/821365/pexels-photo-821365.jpeg" alt="Alitas">
+              <span class="badge">PICANTE</span>
+            </div>
+            <h3>Alitas Picantes</h3>
+            <p>Alitas de pollo con salsa picante y hierbas aromáticas</p>
+            <p class="price">5.50€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +7 pts</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BEBIDAS -->
+      <div id="bebidas" class="menu-category">
+        <h3 class="category-title">🥤 Bebidas Energéticas & Refrescantes</h3>
+        <div class="products-grid">
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/327098/pexels-photo-327098.jpeg" alt="Protein Shake">
+              <span class="badge">PROTEÍNA</span>
+            </div>
+            <h3>Protein Shake Vainilla</h3>
+            <p>Suero de leche premium + plátano + avena + miel (30g proteína)</p>
+            <p class="price">5€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +6 pts</button>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/5637793/pexels-photo-5637793.jpeg" alt="Green Detox">
+              <span class="badge">DETOX</span>
+            </div>
+            <h3>Green Detox Smoothie</h3>
+            <p>Espinaca orgánica + plátano + manzana verde + jengibre + limón</p>
+            <p class="price">4.50€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +5 pts</button>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/5636624/pexels-photo-5636624.jpeg" alt="Berry Blast">
+              <span class="badge">ANTIOXIDANTE</span>
+            </div>
+            <h3>Berry Blast Smoothie</h3>
+            <p>Frutos rojos orgánicos + yogur griego + granola casera + miel</p>
+            <p class="price">5€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +6 pts</button>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/5632372/pexels-photo-5632372.jpeg" alt="Carrot Power">
+              <span class="badge">VITAMINAS</span>
+            </div>
+            <h3>Carrot Power Juice</h3>
+            <p>Zanahoria fresca + naranja + manzana + remolacha + jengibre</p>
+            <p class="price">4€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +5 pts</button>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/3622618/pexels-photo-3622618.jpeg" alt="Chocolate Gains">
+              <span class="badge">PREMIUM</span>
+            </div>
+            <h3>Chocolate Gains Shake</h3>
+            <p>Cacao puro + leche desnatada + plátano + whey protein (35g proteína)</p>
+            <p class="price">5.50€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +7 pts</button>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/5632342/pexels-photo-5632342.jpeg" alt="Coconut">
+              <span class="badge">TROPICAL</span>
+            </div>
+            <h3>Coconut Paradise</h3>
+            <p>Agua de coco natural + piña + mango + coco rallado + hielo</p>
+            <p class="price">4€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +5 pts</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- POSTRES -->
+      <div id="postres" class="menu-category">
+        <h3 class="category-title">🍰 Postres Saludables & Deliciosos</h3>
+        <div class="products-grid">
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1028714/pexels-photo-1028714.jpeg" alt="Protein Brownie">
+              <span class="badge">BAJO AZÚCAR</span>
+            </div>
+            <h3>Protein Brownie</h3>
+            <p>Brownie de chocolate oscuro + whey protein + sin azúcar refinado (15g proteína)</p>
+            <p class="price">3.50€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +4 pts</button>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg" alt="Cheesecake">
+              <span class="badge">FIT</span>
+            </div>
+            <h3>Cheesecake Light</h3>
+            <p>Queso fresco + galletas integrales + arándanos frescos + endulzante natural</p>
+            <p class="price">4€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +5 pts</button>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1624515/pexels-photo-1624515.jpeg" alt="Açai Bowl">
+              <span class="badge">VEGAN</span>
+            </div>
+            <h3>Açai Bowl Premium</h3>
+            <p>Açai orgánico + granola casera + frutas frescas + miel de agave</p>
+            <p class="price">5€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +6 pts</button>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg" alt="Yogurt">
+              <span class="badge">PROBIÓTICOS</span>
+            </div>
+            <h3>Greek Yogurt Parfait</h3>
+            <p>Yogur griego + granola + frutos secos + miel artesana</p>
+            <p class="price">4€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +5 pts</button>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg" alt="Tiramisu">
+              <span class="badge">CLÁSICO</span>
+            </div>
+            <h3>Tiramisu Fit</h3>
+            <p>Tiramisú tradicional con versión light + mascarpone + cacao</p>
+            <p class="price">4.50€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +5 pts</button>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg" alt="Fresas">
+              <span class="badge">NATURAL</span>
+            </div>
+            <h3>Fresas con Crema Ligera</h3>
+            <p>Fresas frescas + crema batida ligera + almíbar de caña de azúcar</p>
+            <p class="price">3.75€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +4 pts</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MENÚS -->
+      <div id="menus" class="menu-category">
+        <h3 class="category-title">📦 Menús Especiales</h3>
+        <div class="products-grid">
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg" alt="Menú Del Día">
+              <span class="badge">OFERTA</span>
+            </div>
+            <h3>Menú Del Día</h3>
+            <p>Burger del día + papas + bebida + postre sorpresa</p>
+            <p class="price">12€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +15 pts</button>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg" alt="Menú Family">
+              <span class="badge">FAMILIA</span>
+            </div>
+            <h3>Menú Familiar</h3>
+            <p>4 Burgers + papas + 4 bebidas + 4 postres + puntos extra</p>
+            <p class="price">48€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +60 pts</button>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg" alt="Menú After Gym">
+              <span class="badge">POST-ENTRENAMIENTO</span>
+            </div>
+            <h3>Menú After Gym</h3>
+            <p>Burger de pollo + papas + protein shake + barrita energética</p>
+            <p class="price">14€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +17 pts</button>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg" alt="Menú Sano">
+              <span class="badge">LIGHT</span>
+            </div>
+            <h3>Menú Sano & Light</h3>
+            <p>Burger vegan + ensalada + bebida detox + fruta</p>
+            <p class="price">11€</p>
+            <button class="btn" onclick="openCheckout()">Comprar • +13 pts</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- REWARDS SECTION -->
   <section id="rewards" class="container">
-    <div class="rewards">
-      <h2>🎁 Recompensas con Puntos</h2>
-      <p class="muted">Acumula puntos con cada compra y canjéalos por descuentos.</p>
-      
-      <div class="grid rewards-grid">
-        <div class="card reward">
-          <h3>Descuento Burger</h3>
-          <p><strong>50 puntos</strong> → 20% descuento en una burger</p>
-          <button class="btn" onclick="redeem(50)">Canjear</button>
-        </div>
+    <h2>🎁 Recompensas & Beneficios</h2>
+    <p class="muted">Acumula puntos con cada compra y canjéalos por premios increíbles</p>
 
-        <div class="card reward">
-          <h3>Descuento JalFits</h3>
-          <p><strong>100 puntos</strong> → 30% descuento en membresía JalFits</p>
-          <button class="btn" onclick="redeemGym(100)">Canjear y ir a JalFits</button>
-        </div>
+    <div class="grid rewards-grid">
+      <!-- REWARD 1 -->
+      <div class="card reward">
+        <div class="reward-icon">💰</div>
+        <h3>10% Descuento</h3>
+        <p class="text-small">50 Puntos</p>
+        <p class="muted">Compra mayor a 15€</p>
+        <button class="btn" onclick="redeemReward('10% Descuento', 50)">Canjear</button>
       </div>
+
+      <!-- REWARD 2 -->
+      <div class="card reward">
+        <div class="reward-icon">💳</div>
+        <h3>20% Descuento</h3>
+        <p class="text-small">100 Puntos</p>
+        <p class="muted">Compra mayor a 25€</p>
+        <button class="btn" onclick="redeemReward('20% Descuento', 100)">Canjear</button>
+      </div>
+
+      <!-- REWARD 3 -->
+      <div class="card reward">
+        <div class="reward-icon">🍔</div>
+        <h3>Hamburguesa Gratis</h3>
+        <p class="text-small">150 Puntos</p>
+        <p class="muted">Hasta 8€ de valor</p>
+        <button class="btn" onclick="redeemReward('Hamburguesa Gratis', 150)">Canjear</button>
+      </div>
+
+      <!-- REWARD 4 -->
+      <div class="card reward">
+        <div class="reward-icon">🥤</div>
+        <h3>Bebida Gratis</h3>
+        <p class="text-small">75 Puntos</p>
+        <p class="muted">Cualquier bebida hasta 5€</p>
+        <button class="btn" onclick="redeemReward('Bebida Gratis', 75)">Canjear</button>
+      </div>
+
+      <!-- REWARD 5 -->
+      <div class="card reward">
+        <div class="reward-icon">🍰</div>
+        <h3>Postre Gratis</h3>
+        <p class="text-small">60 Puntos</p>
+        <p class="muted">Postre sin costo</p>
+        <button class="btn" onclick="redeemReward('Postre Gratis', 60)">Canjear</button>
+      </div>
+
+      <!-- REWARD 6 -->
+      <div class="card reward">
+        <div class="reward-icon">🎉</div>
+        <h3>Pack Combo Plus</h3>
+        <p class="text-small">120 Puntos</p>
+        <p class="muted">Burger + Bebida + Postre</p>
+        <button class="btn" onclick="redeemReward('Pack Combo Plus', 120)">Canjear</button>
+      </div>
+
+      <!-- REWARD 7 -->
+      <div class="card reward">
+        <div class="reward-icon">👑</div>
+        <h3>VIP Combo Deluxe</h3>
+        <p class="text-small">200 Puntos</p>
+        <p class="muted">Triple Stack + 2 bebidas</p>
+        <button class="btn" onclick="redeemReward('VIP Combo Deluxe', 200)">Canjear</button>
+      </div>
+
+      <!-- REWARD 8 -->
+      <div class="card reward">
+        <div class="reward-icon">🎂</div>
+        <h3>Birthday Special</h3>
+        <p class="text-small">180 Puntos</p>
+        <p class="muted">2x puntos + Postre sorpresa</p>
+        <button class="btn" onclick="redeemReward('Birthday Special', 180)">Canjear</button>
+      </div>
+
+      <!-- REWARD 9 -->
+      <div class="card reward">
+        <div class="reward-icon">💪</div>
+        <h3>Membresía JalFits</h3>
+        <p class="text-small">300 Puntos</p>
+        <p class="muted">1 mes gratis en gimnasio</p>
+        <button class="btn" onclick="redeemReward('Membresía JalFits', 300)">Canjear</button>
+      </div>
+    </div>
+
+    <!-- INFO RECOMPENSAS -->
+    <div class="rewards-info">
+      <h3>¿Cómo funciona nuestro sistema de puntos?</h3>
+      <ul class="info-list">
+        <li>Gana 1 punto por cada euro gastado en compras</li>
+        <li>Los puntos NUNCA expiran - son tuyos para siempre</li>
+        <li>Puedes transferir puntos a otros miembros de tu familia</li>
+        <li>Acceso exclusivo a ofertas especiales cada semana</li>
+        <li>Doble de puntos en tu cumpleaños y aniversario</li>
+      </ul>
     </div>
   </section>
 
-  <!-- ABOUT & CONTACT SECTION -->
+  <!-- ABOUT SECTION -->
   <section id="about" class="container">
     <div class="about">
-      <h2>ℹ️ Sobre Jalamburguers</h2>
-      <p>Jalamburguers es una iniciativa local que combina comida saludable de calidad con un sistema de recompensas inteligente. Nuestro objetivo es que disfrutes de burgers deliciosas mientras apoyas tu estilo de vida activo y ahorras dinero en tu gimnasio asociado JalFits.</p>
-      
-      <h3 style="color: var(--color-accent); margin-top: 24px;">📍 Información de contacto</h3>
+      <h2>Sobre Jalamburguers</h2>
+      <p>Somos más que un restaurante. Jalamburguers es un estilo de vida para deportistas que no quieren renunciar a la delicia de comer bien. Todas nuestras hamburguesas están diseñadas con nutricionistas y entrenadores personales para maximizar tu recuperación muscular y bienestar general.</p>
+
+      <h3 style="margin-top: 40px;">📞 Ubicación y Contacto</h3>
       <div class="contact">
         <div>
-          <h4>Dirección</h4>
-          <p>C/ Ejemplo 123, Ciudad</p>
+          <h4>📍 Dirección</h4>
+          <p><strong>Calle Burger 123<br>Planta 1<br>Centro Comercial La Jalapeña</strong></p>
         </div>
         <div>
-          <h4>Horario</h4>
-          <p>Lunes a Domingo<br>11:00 — 23:00</p>
+          <h4>📞 Teléfono</h4>
+          <p><strong>+34 600 111 222</strong><br><small>Servicios desde 11:00 - 23:00</small></p>
         </div>
         <div>
-          <h4>Contacto</h4>
-          <p>Tel: +34 600 000 000<br>Email: info@jalamburguers.example</p>
+          <h4>📧 Email</h4>
+          <p><strong>hola@jalamburguers.local</strong><br><small>Respuesta en 24h</small></p>
+        </div>
+        <div>
+          <h4>🕐 Horario</h4>
+          <p><strong>L-V:</strong> 11:00 - 23:00<br><strong>Sábado:</strong> 12:00 - 23:30<br><strong>Domingo:</strong> 12:00 - 22:00</p>
         </div>
       </div>
 
-      <!-- 📸 MAPA: Agregar Google Maps o Leaflet aquí (reemplazar este div) -->
-      <!-- Opción 1: Usar Google Maps embed -->
-      <!-- <iframe src="https://www.google.com/maps/embed?pb=..." width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade;"></iframe> -->
-      
-      <!-- Opción 2: Usar imagen estática de mapa -->
-      <!-- <img src="images/map.jpg" alt="Mapa de ubicación" style="width: 100%; border-radius: 12px; margin-top: 24px;"> -->
-
-      <!-- Placeholder for Google Maps or similar -->
-      <div style="margin-top: 24px; background: var(--color-border); border-radius: var(--border-radius); padding: 40px; text-align: center; color: var(--color-text-light);">
-        <p>🗺️ Aquí va tu mapa (Google Maps, Leaflet, etc.)</p>
+      <div style="margin-top: 40px; text-align: center;">
+        <p style="color: var(--color-text-light);">📍 [Google Maps - Tu ubicación aquí]</p>
       </div>
     </div>
   </section>
@@ -173,149 +723,85 @@
      =================================================================== -->
 <footer class="site-footer">
   <div class="container footer-grid">
-    <div style="display: flex; align-items: center; gap: 16px;">
-      <!-- LOGO CIRCULAR en footer (60x60px) -->
-      <img src="images/logo1.png" alt="Logo Jalamburguers" class="logo-circular-md">
-      <div>
-        <h4>Jalamburguers</h4>
-        <p>Comida sana para gente activa. Entrena. Come. Ahorra.</p>
-      </div>
+    <div>
+      <h4>Jalamburguers</h4>
+      <p>Comida saludable para deportistas con sistema de puntos y recompensas.</p>
     </div>
     <div>
       <h4>Síguenos</h4>
       <p>
         <a href="#">Instagram</a> • 
         <a href="#">Facebook</a> • 
-        <a href="#">Twitter</a>
+        <a href="#">TikTok</a>
       </p>
     </div>
     <div>
-      <h4>Legal</h4>
+      <h4>Enlaces</h4>
       <p>
-        <a href="#" onclick="openModal('privacyModal'); return false;">Política de privacidad</a> • 
-        <a href="#" onclick="openModal('termsModal'); return false;">Términos de servicio</a>
+        <a href="jalfits.html">JalFits</a> • 
+        <a href="privacy-gym.html">Privacidad</a> • 
+        <a href="terms-gym.html">Términos</a>
       </p>
     </div>
   </div>
   <div class="container" style="text-align: center; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 24px;">
     <p style="margin: 0; font-size: 0.875rem; color: rgba(255, 255, 255, 0.6);">
-      © 2026 Jalamburguers • Todos los derechos reservados | Gimnasio asociado: JalFits 💪
+      © 2026 Jalamburguers • Todos los derechos reservados
     </p>
   </div>
 </footer>
 
 <!-- ===================================================================
-     MODALES
-     =================================================================== -->
-<!-- Modal Política de Privacidad -->
-<div id="privacyModal" class="modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h2>Política de Privacidad</h2>
-      <span class="close" onclick="closeModal('privacyModal')">&times;</span>
-    </div>
-    <div class="modal-body">
-      <p><strong>Última actualización:</strong> 2026</p>
-      
-      <h3>1. Introducción</h3>
-      <p>Jalamburguers respeta tu privacidad y se compromete a proteger tus datos personales. Esta política de privacidad explica cómo recopilamos, utilizamos y protegemos tu información.</p>
-      
-      <h3>2. Información que Recopilamos</h3>
-      <p>Recopilamos información que nos proporcionas directamente, incluyendo:</p>
-      <ul>
-        <li>Nombre y email</li>
-        <li>Información de compra</li>
-        <li>Datos de registro de cuenta</li>
-        <li>Información de pago</li>
-      </ul>
-      
-      <h3>3. Uso de la Información</h3>
-      <p>Utilizamos tu información para:</p>
-      <ul>
-        <li>Procesar tus compras y pedidos</li>
-        <li>Gestionar tu cuenta de usuario</li>
-        <li>Enviar actualizaciones sobre promociones y recompensas</li>
-        <li>Mejorar nuestros servicios</li>
-      </ul>
-      
-      <h3>4. Protección de Datos</h3>
-      <p>Implementamos medidas de seguridad técnicas y organizativas para proteger tus datos contra acceso no autorizado, alteración o destrucción.</p>
-      
-      <h3>5. Derechos del Usuario</h3>
-      <p>Tienes derecho a acceder, corregir o eliminar tus datos personales. Contacta con nosotros en: info@jalamburguers.example</p>
-      
-      <h3>6. Cambios en esta Política</h3>
-      <p>Nos reservamos el derecho a actualizar esta política de privacidad. Te notificaremos de cambios significativos.</p>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Términos de Servicio -->
-<div id="termsModal" class="modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h2>Términos de Servicio</h2>
-      <span class="close" onclick="closeModal('termsModal')">&times;</span>
-    </div>
-    <div class="modal-body">
-      <p><strong>Última actualización:</strong> 2026</p>
-      
-      <h3>1. Aceptación de Términos</h3>
-      <p>Al acceder y utilizar Jalamburguers, aceptas quedar vinculado por estos términos y condiciones.</p>
-      
-      <h3>2. Uso del Servicio</h3>
-      <p>Jalamburguers proporciona un servicio de venta de comida saludable con un sistema de recompensas de puntos. Nos reservamos el derecho a modificar o suspender el servicio en cualquier momento.</p>
-      
-      <h3>3. Cuenta de Usuario</h3>
-      <p>Eres responsable de mantener la confidencialidad de tu contraseña y cuenta. Aceptas toda actividad que ocurra bajo tu cuenta.</p>
-      
-      <h3>4. Pedidos y Pagos</h3>
-      <p>Los pedidos están sujetos a aceptación. Nos reservamos el derecho de rechazar cualquier pedido. Los precios pueden cambiar sin previo aviso.</p>
-      
-      <h3>5. Sistema de Puntos</h3>
-      <p>Los puntos se acumulan con cada compra según la promoción establecida. Los puntos no tienen valor monetario y solo pueden canjearse por descuentos ofrecidos por Jalamburguers.</p>
-      
-      <h3>6. Limitación de Responsabilidad</h3>
-      <p>Jalamburguers no será responsable por daños indirectos, incidentales, especiales o consecuentes derivados del uso de nuestro servicio.</p>
-      
-      <h3>7. Ley Aplicable</h3>
-      <p>Estos términos se rigen por las leyes aplicables. Cualquier disputa se resolverá en los tribunales competentes.</p>
-      
-      <h3>8. Contacto</h3>
-      <p>Para consultas sobre estos términos, contacta con: info@jalamburguers.example</p>
-    </div>
-  </div>
-</div>
-
-<!-- ===================================================================
      SCRIPTS
      =================================================================== -->
-<script>
-function openModal(modalId) {
-  document.getElementById(modalId).classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal(modalId) {
-  document.getElementById(modalId).classList.remove('active');
-  document.body.style.overflow = 'auto';
-}
-
-// Cerrar modal si se hace click fuera de él
-window.onclick = function(event) {
-  if (event.target.classList.contains('modal')) {
-    event.target.classList.remove('active');
-    document.body.style.overflow = 'auto';
-  }
-}
-</script>
-
+<script src="js/icons.js"></script>
 <script src="js/notifications.js"></script>
 <script src="js/cookies.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/points.js"></script>
 <script src="js/cart.js"></script>
 <script src="js/main.js"></script>
+
+<script>
+// Menú desplegable
+function showCategory(categoryId) {
+  // Ocultar todas las categorías
+  const categories = document.querySelectorAll('.menu-category');
+  categories.forEach(cat => cat.classList.remove('active'));
+  
+  // Mostrar la categoría seleccionada
+  document.getElementById(categoryId).classList.add('active');
+  
+  // Actualizar botones
+  const buttons = document.querySelectorAll('.menu-dropdown-btn');
+  buttons.forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  // Scroll suave a la sección
+  setTimeout(() => {
+    document.getElementById(categoryId).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
+// Función de compra
+function openCheckout() {
+  notificationManager.info('Agregado al carrito', 'Elemento añadido con éxito');
+}
+
+// Función de canjear recompensa
+function redeemReward(rewardName, points) {
+  const currentPoints = parseInt(document.getElementById('points').textContent) || 0;
+  
+  if (currentPoints >= points) {
+    const newPoints = currentPoints - points;
+    document.getElementById('points').textContent = newPoints;
+    localStorage.setItem('points', newPoints);
+    notificationManager.success('¡Recompensa canjeada!', `Has gatado ${points} puntos en ${rewardName}`);
+  } else {
+    notificationManager.error('Puntos insuficientes', `Necesitas ${points - currentPoints} puntos más`);
+  }
+}
+</script>
 
 </body>
 </html>
