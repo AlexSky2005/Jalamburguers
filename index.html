@@ -23,9 +23,8 @@
       --hero-bg: linear-gradient(135deg, #ffe600 0%, #ff8800 100%);
       --hero-overlay: linear-gradient(135deg, rgba(255, 230, 0, 0.7) 0%, rgba(255, 136, 0, 0.7) 100%);
       
-      /* --- ARREGLO DE LA BARRA DE NAVEGACIÓN --- */
-      --nav-bg: #ffffff; /* Fondo sólido blanco */
-      --nav-link-color: #2c2c2c; /* Letras oscuras para leerse bien */
+      --nav-bg: #ffffff; 
+      --nav-link-color: #2c2c2c; 
       --nav-border: #e6dfd5;
       
       --max-width: 1200px;
@@ -50,9 +49,8 @@
       --hero-bg: linear-gradient(135deg, #0f1419 0%, #000000 100%);
       --hero-overlay: linear-gradient(135deg, rgba(16, 185, 129, 0.7) 0%, rgba(0, 0, 0, 0.8) 100%);
       
-      /* --- ARREGLO DE LA BARRA DE NAVEGACIÓN (GYM) --- */
-      --nav-bg: #121921; /* Fondo sólido oscuro */
-      --nav-link-color: #ffffff; /* Letras blancas para leerse bien */
+      --nav-bg: #121921; 
+      --nav-link-color: #ffffff; 
       --nav-border: #1e293b;
     }
 
@@ -64,10 +62,8 @@
     body { margin: 0; padding: 0; font-family: var(--font-primary); background-color: var(--color-bg); color: var(--color-text); line-height: 1.6; transition: background-color 0.4s ease, color 0.4s ease; overflow-x: hidden; }
     .container { max-width: var(--max-width); margin: 0 auto; padding: 0 20px; }
     
-    /* Iconos SVG Globales */
     .icon { width: 1.2em; height: 1.2em; vertical-align: -0.15em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; margin-right: 4px; display: inline-block;}
 
-    /* SPA View Controller */
     .app-view { display: none; }
     .app-view.active { display: block; animation: fadeIn 0.4s ease; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -85,11 +81,13 @@
     .main-nav a { color: var(--nav-link-color); text-decoration: none; font-weight: 700; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s; cursor: pointer; display: flex; align-items: center;}
     .main-nav a:hover { color: var(--color-accent); }
     
-    /* Botón Hamburguesa (Móvil) */
     .menu-toggle { display: none; background: none; border: none; color: var(--nav-link-color); font-size: 1.8rem; cursor: pointer; padding: 0; }
 
+    /* Estilo del Badge del Carrito en el Header */
+    .cart-badge { background: #ef4444; color: white; border-radius: 50%; padding: 2px 8px; font-size: 0.8rem; font-weight: bold; margin-left: 5px; }
+
     /* ================================================================
-       4. HEADER HERO & LOGO2.JPG (RESPONSIVE BANNER)
+       4. HEADER HERO & LOGO2.JPG 
        ================================================================ */
     header.hero { position: relative; overflow: hidden; padding-bottom: 80px; background: var(--hero-bg); transition: background 0.4s ease; }
     .hero-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.2; }
@@ -97,7 +95,6 @@
     
     .hero-inner { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center; }
     
-    /* Contenedor inteligente para logo2.jpg */
     .banner-wrapper { position: relative; width: 100%; max-width: 800px; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 15px 35px rgba(0,0,0,0.3)); margin: 0 auto; }
     .banner-bg-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: fill; border-radius: 20px; z-index: 0; }
     
@@ -105,7 +102,6 @@
     .banner-content h1 { font-size: clamp(1.8rem, 4vw, 3.5rem); font-weight: 900; color: #1a1a1a; margin: 0; line-height: 1.1; text-transform: uppercase; letter-spacing: -1px; }
     .banner-content .lead { font-size: clamp(0.9rem, 2vw, 1.2rem); color: #333; margin: 0; font-weight: 700; }
 
-    /* Gym Header (Normal) */
     .hero-inner-gym { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 20px; padding: 80px 20px; max-width: var(--max-width); margin: 0 auto;}
     .hero-inner-gym h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; color: white; margin: 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); line-height: 1.1; }
     .hero-inner-gym .lead { font-size: 1.2rem; color: rgba(255, 255, 255, 0.9); max-width: 500px; margin: 0; }
@@ -127,7 +123,7 @@
     .menu-dropdown-btn.active { background: linear-gradient(135deg, var(--btn-grad-1) 0%, var(--btn-grad-2) 100%); color: white; border-color: transparent; box-shadow: 0 6px 15px rgba(0,0,0,0.15); }
 
     /* ================================================================
-       6. TARJETAS, MÓDULOS Y GRID
+       6. TARJETAS Y GRID
        ================================================================ */
     section { padding: 60px 0; }
     section h2 { font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 900; margin-bottom: 10px; color: var(--color-text); display: flex; align-items: center; gap: 10px;}
@@ -155,10 +151,11 @@
     .menu-category.active { display: block; animation: fadeIn 0.4s ease; }
 
     .card.reward { align-items: center; text-align: center; justify-content: center;}
-    .reward-icon { font-size: 3rem; margin-bottom: 10px; }
+    .reward-icon { margin-bottom: 15px; color: var(--color-accent); }
+    .reward-icon svg { width: 60px; height: 60px; }
 
     /* ================================================================
-       7. COMPONENTES GYM (Carrusel)
+       7. COMPONENTES GYM Y CARRUSEL
        ================================================================ */
     .carousel { position: relative; width: 100%; height: 70vh; overflow: hidden; border-radius: 0 0 30px 30px; box-shadow: var(--shadow-lg);}
     .carousel-slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease-in-out; background: #000; }
@@ -171,12 +168,6 @@
     .carousel-btn { width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; background: rgba(255,255,255,0.2); cursor: pointer; transition: 0.3s; padding:0;}
     .carousel-btn.active { background: var(--color-accent); border-color: var(--color-accent); width: 30px; border-radius: 10px; }
 
-    .facilities-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin: 40px 0; }
-    .facility-item { background: var(--color-card); border: 1px solid var(--color-border); border-radius: var(--border-radius); padding: 30px 20px; text-align: center; transition: 0.3s; box-shadow: var(--shadow-sm);}
-    .facility-item:hover { border-color: var(--color-accent); transform: translateY(-5px); box-shadow: var(--shadow-md);}
-    .facility-icon { font-size: 3rem; margin-bottom: 15px; }
-
-    /* Planes Gym */
     .plan-card-expanded { background: var(--color-card); border: 1px solid var(--color-border); border-radius: 16px; padding: 35px 25px; text-align: center; transition: 0.4s; position: relative; display: flex; flex-direction: column;}
     .plan-card-expanded.featured { background: linear-gradient(135deg, #059669 0%, #047857 100%); border: none; transform: scale(1.03); color: white;}
     .plan-badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #ff8800; color: white; padding: 6px 15px; border-radius: 20px; font-weight: bold; font-size: 0.75rem; letter-spacing: 1px; }
@@ -184,18 +175,23 @@
     /* ================================================================
        8. MODALES, FORMULARIOS Y TOASTS
        ================================================================ */
-    .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 15px;}
+    .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 15px; text-align: left;}
     .form-group label { font-weight: 700; font-size: 0.9rem; color: var(--color-text);}
-    /* Forzar 16px en inputs para evitar zoom en iOS */
     .form-group input, .form-group select { padding: 12px; border: 2px solid var(--color-border); border-radius: 10px; font-family: inherit; background-color: var(--color-bg); color: var(--color-text); font-size: 16px; transition: border 0.3s;}
     .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--color-accent); }
+    
+    /* Configuración para Opciones Personalizables (Ingredientes extra/quitar) */
+    .custom-option { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border: 1px solid var(--color-border); border-radius: 8px; margin-bottom: 8px; background: var(--color-bg); cursor: pointer;}
+    .custom-option:hover { border-color: var(--color-accent); }
+    .custom-option input[type="checkbox"] { margin: 0; width: 18px; height: 18px; accent-color: var(--color-accent); cursor: pointer;}
+    .custom-option-price { font-weight: bold; color: var(--color-accent); }
 
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.3s; backdrop-filter: blur(5px); padding: 20px; }
     .modal-overlay.active { opacity: 1; visibility: visible; }
-    .modal { background: var(--color-card); border-radius: 20px; width: 100%; max-width: 450px; max-height: 90vh; overflow-y: auto; padding: 30px; transform: translateY(20px); transition: 0.3s; color: var(--color-text); box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--color-border);}
+    .modal { background: var(--color-card); border-radius: 20px; width: 100%; max-width: 500px; max-height: 90vh; overflow-y: auto; padding: 30px; transform: translateY(20px); transition: 0.3s; color: var(--color-text); box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--color-border);}
     .modal-overlay.active .modal { transform: translateY(0); }
     .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--color-border); padding-bottom: 15px; }
-    .modal-header h2 { margin: 0; font-size: 1.5rem; color: var(--color-text);}
+    .modal-header h2 { margin: 0; font-size: 1.5rem; color: var(--color-text); display:flex; align-items:center; gap:8px;}
     .modal-close { background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--color-text-light); transition: color 0.3s; padding:0;}
     .modal-close:hover { color: #ef4444; }
 
@@ -215,7 +211,6 @@
     .legal-container { max-width: 800px; margin: 0 auto; background: var(--color-card); border-radius: 16px; padding: 40px; box-shadow: var(--shadow-sm); color: var(--color-text); border: 1px solid var(--color-border);}
     .legal-container h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 20px; border-bottom: 3px solid var(--color-accent); padding-bottom: 15px; color: var(--color-text);}
     .legal-container h2 { color: var(--color-accent); margin-top: 30px; font-size: 1.3rem; font-weight: 800;}
-    .legal-container p, .legal-container ul { font-size: 1rem; line-height: 1.8; margin-bottom: 15px; color: var(--color-text-light); }
     
     .site-footer { background-color: #0a0f15; color: white; padding: 60px 0 30px 0; margin-top: 60px; border-top: 5px solid var(--color-accent); }
     .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
@@ -227,17 +222,16 @@
        10. RESPONSIVO MÓVIL
        ================================================================ */
     @media (max-width: 768px) {
-      .sticky-nav-container { padding: 0 10px; top: 5px; }
-      .nav-row { padding: 10px 20px; border-radius: 15px; flex-wrap: wrap;}
+      .sticky-nav-container { padding: 0 10px; top: 10px; }
+      .nav-row { padding: 10px 20px; border-radius: 20px; flex-wrap: wrap;}
       .menu-toggle { display: block; }
       
-      /* Menú Desplegable Móvil */
-      .main-nav { display: none; width: 100%; flex-direction: column; gap: 15px; padding-top: 20px; margin-top: 10px; border-top: 1px solid rgba(0,0,0,0.1); }
+      .main-nav { display: none; width: 100%; flex-direction: column; gap: 15px; padding-top: 15px; margin-top: 10px; border-top: 1px solid rgba(0,0,0,0.1); }
       body.gym-theme .main-nav { border-top-color: rgba(255,255,255,0.1); }
       .main-nav.active-mobile { display: flex; animation: fadeIn 0.3s ease; }
       
       .banner-content { width: 90%; padding: 5% 0;}
-      .banner-wrapper { aspect-ratio: 4/3; } /* Ajustar proporción en móvil */
+      .banner-wrapper { aspect-ratio: 4/3; } 
       
       .hero-actions { flex-direction: column; width: 100%; }
       .hero-actions .btn { width: 100%; }
@@ -249,7 +243,6 @@
       
       .legal-container { padding: 25px; margin-top: 20px;}
       
-      /* Botones de menú de comida scrolleables en móvil */
       #products > div:first-of-type { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 10px; justify-content: flex-start !important; -webkit-overflow-scrolling: touch; }
       .menu-dropdown-btn { flex: 0 0 auto; }
     }
@@ -257,27 +250,57 @@
 </head>
 <body>
 
+  <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-login" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+    <symbol id="i-credit-card" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></symbol>
+    
+    <symbol id="i-gift" viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></symbol>
+    <symbol id="i-money" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></symbol>
+    
+    <symbol id="i-burger" viewBox="0 0 24 24"><path d="M3 11a9 9 0 0 1 18 0H3z"/><path d="M21 16a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2h18v2z"/></symbol>
+    <symbol id="i-plate" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/></symbol>
+    <symbol id="i-salad" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10 10 10 0 0 1-10-10A10 10 0 0 1 12 2z"/><path d="M8 12c1.5-1.5 3.5-1.5 5 0"/></symbol>
+    <symbol id="i-cup" viewBox="0 0 24 24"><path d="M6 5h12l-1.5 15H7.5L6 5z"/><path d="M10 5V2h4v3"/></symbol>
+    <symbol id="i-cake" viewBox="0 0 24 24"><path d="M20 21H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2z"/><path d="M12 7v14"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></symbol>
+    <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M2 9V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a3 3 0 0 0 0 6v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-4a3 3 0 0 0 0-6Z"/><path d="M13 3v20"/></symbol>
+    
+    <symbol id="i-gym" viewBox="0 0 24 24"><path d="M6.5 6.5h11"/><path d="M6.5 17.5h11"/><path d="M3 6.5v11"/><path d="M21 6.5v11"/><path d="M6.5 9v6"/><path d="M17.5 9v6"/></symbol>
+  </svg>
+
   <div id="view-jalamburguers" class="app-view active">
     
     <div class="sticky-nav-container">
       <nav class="nav-row">
-        <a href="#jalamburguers" class="nav-logo">
-          <img src="images/logo1.png" alt="Logo" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'50\' r=\'50\' fill=\'%23ff8800\'/></svg>'">
+        <a href="#jalamburguers" class="nav-logo" id="main-logo-text">
+          <img src="images/logo1.png" alt="Logo" id="main-logo-img" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'50\' r=\'50\' fill=\'%23f97316\'/></svg>'">
           Jalamburguers
         </a>
         <button class="menu-toggle" onclick="toggleMobileMenu()">
-          <svg class="icon" style="margin:0;"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg class="icon" style="margin:0;"><use href="#i-menu"/></svg>
         </button>
         <nav class="main-nav">
           <a onclick="navigateAndScroll('view-jalamburguers', 'products')">Menú</a>
           <a onclick="navigateAndScroll('view-jalamburguers', 'rewards')">Recompensas</a>
-          <a onclick="navigateAndScroll('view-jalfits', 'view-jalfits')">JalFits</a>
-          <button class="btn auth-btn" style="padding: 8px 20px; font-size: 0.85rem; width: 100%; border: none;">Ingresar</button>
+          <a onclick="navigateAndScroll('view-jalfits', 'view-jalfits')">Gym JalFits</a>
+          
+          <a onclick="openCartModal()" style="color: var(--color-accent); font-weight: 800;">
+            <svg class="icon"><use href="#i-cart"/></svg> Carrito <span class="cart-badge" id="cart-count-badge">0</span>
+          </a>
+
+          <button class="btn auth-btn" style="padding: 8px 20px; font-size: 0.85rem; border:none; margin-left:10px;">
+            <svg class="icon"><use href="#i-login"/></svg> Ingresar
+          </button>
         </nav>
       </nav>
     </div>
 
-    <header class="hero" style="padding-top: 20px;">
+    <header class="hero">
       <video autoplay muted loop playsinline class="hero-video">
         <source src="https://cdn.pixabay.com/vimeo/32959666/burger-23136.mp4?width=1280&hash=0e08c691be02bcbb2638fec3a1d9539327850dfd" type="video/mp4">
       </video>
@@ -286,13 +309,17 @@
       <div class="container">
         <div class="hero-inner">
           <div class="banner-wrapper">
-            <img src="logo2.jpg" alt="Jalamburguers Banner" class="banner-bg-img" onerror="this.style.display='none'; this.parentElement.style.background='var(--color-accent)';">
+            <img src="images/logo2.jpg" alt="Jalamburguers Banner" class="banner-bg-img" onerror="this.style.display='none'; this.parentElement.style.background='var(--color-accent)';">
             <div class="banner-content">
               <h1>Entrena.<br>Come Sano.<br>Gana Puntos.</h1>
               <p class="lead">Las mejores hamburguesas proteicas y beneficios exclusivos para deportistas de élite.</p>
               <div class="hero-actions">
-                <button onclick="navigateAndScroll('view-jalamburguers', 'products')" class="btn" style="border:none;">Hacer Pedido</button>
-                <a onclick="navigateAndScroll('view-jalfits', 'view-jalfits')" class="btn ghost" style="cursor: pointer;">Descubrir Gimnasio</a>
+                <button onclick="navigateAndScroll('view-jalamburguers', 'products')" class="btn" style="border:none;">
+                  <svg class="icon"><use href="#i-bag"/></svg> Hacer Pedido
+                </button>
+                <a onclick="navigateAndScroll('view-jalfits', 'view-jalfits')" class="btn ghost" style="cursor:pointer;">
+                  <svg class="icon"><use href="#i-gym"/></svg> Descubrir Gimnasio
+                </a>
               </div>
             </div>
           </div>
@@ -303,14 +330,14 @@
     <main>
       <section class="container" style="padding-top:0;">
         <div class="metrics">
-          <div><h3>🎁 Mis Puntos</h3><span id="points">0</span></div>
-          <div><h3>🛍️ Pedidos</h3><span id="purchases">0</span></div>
-          <div><h3>💰 Inversión</h3><span id="revenue">0€</span></div>
+          <div><h3><svg class="icon"><use href="#i-gift"/></svg> Mis Puntos</h3><span id="points">0</span></div>
+          <div><h3><svg class="icon"><use href="#i-bag"/></svg> Pedidos</h3><span id="purchases">0</span></div>
+          <div><h3><svg class="icon"><use href="#i-money"/></svg> Inversión</h3><span id="revenue">0€</span></div>
         </div>
       </section>
 
       <section id="products" class="container">
-        <h2>🍔 Nuestro Menú Premium</h2>
+        <h2><svg class="icon" style="width:36px;height:36px;color:var(--color-accent);"><use href="#i-burger"/></svg> Nuestro Menú Premium</h2>
         <p class="muted">Ingredientes frescos, macros calculados y sabor increíble diseñado para tu recuperación.</p>
         
         <div style="display: flex; flex-wrap: wrap; gap:10px; margin-bottom: 40px; justify-content:center;">
@@ -324,49 +351,61 @@
         <div class="menu-container">
           <div id="burgers" class="menu-category active">
             <div class="grid">
-              <div class="card"><div class="card-image"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" alt="Burger"><span class="badge">BESTSELLER</span></div><h3>JalBurger Proteica</h3><p>Doble carne magra + pan de masa madre + salsa cero calorías.</p><p class="price">8.50€</p><button class="btn" onclick="openCheckout(1, 'JalBurger Proteica', 8.5, 10)">Añadir • +10 pts</button></div>
-              <div class="card"><div class="card-image"><img src="https://images.unsplash.com/photo-1525059696034-4967a8e1dca2?auto=format&fit=crop&w=600&q=80" alt="Vegan"><span class="badge">VEGAN</span></div><h3>JalVegan Power</h3><p>Patty de heura + aguacate fresco + pan de espinacas.</p><p class="price">7.90€</p><button class="btn" onclick="openCheckout(2, 'JalVegan Power', 7.9, 9)">Añadir • +9 pts</button></div>
-              <div class="card"><div class="card-image"><img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?auto=format&fit=crop&w=600&q=80" alt="Chicken"><span class="badge">PREMIUM</span></div><h3>Chicken Boost</h3><p>Pechuga marinada a baja temp + queso proteico.</p><p class="price">9.00€</p><button class="btn" onclick="openCheckout(3, 'Chicken Boost', 9, 11)">Añadir • +11 pts</button></div>
-              <div class="card"><div class="card-image"><img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80" alt="BBQ"><span class="badge">PICANTE</span></div><h3>BBQ Fit</h3><p>Carne ahumada + jalapeños + bacon de pavo.</p><p class="price">8.50€</p><button class="btn" onclick="openCheckout(4, 'BBQ Fit', 8.5, 11)">Añadir • +11 pts</button></div>
-              <div class="card"><div class="card-image"><img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80" alt="Mediterranea"><span class="badge">SANA</span></div><h3>Mediterranean</h3><p>Feta + tomate seco + yogur griego + almendras.</p><p class="price">10.00€</p><button class="btn" onclick="openCheckout(5, 'Mediterranean', 10, 13)">Añadir • +13 pts</button></div>
-              <div class="card"><div class="card-image"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80" alt="Triple"><span class="badge">DELUXE</span></div><h3>Triple Stack</h3><p>3 patties de carne magra + huevo a la plancha.</p><p class="price">12.00€</p><button class="btn" onclick="openCheckout(6, 'Triple Stack', 12, 15)">Añadir • +15 pts</button></div>
+              <div class="card"><div class="card-image"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" alt="Burger"><span class="badge">BESTSELLER</span></div><h3>JalBurger Proteica</h3><p>Doble carne magra + pan de masa madre + salsa cero calorías.</p><p class="price">8.50€</p><button class="btn" onclick="openCustomize(1, 'JalBurger Proteica', 8.5, 10, 'burger')">Personalizar • +10 pts</button></div>
+              <div class="card"><div class="card-image"><img src="https://images.unsplash.com/photo-1525059696034-4967a8e1dca2?auto=format&fit=crop&w=600&q=80" alt="Vegan"><span class="badge">VEGAN</span></div><h3>JalVegan Power</h3><p>Patty de heura + aguacate fresco + pan de espinacas.</p><p class="price">7.90€</p><button class="btn" onclick="openCustomize(2, 'JalVegan Power', 7.9, 9, 'burger')">Personalizar • +9 pts</button></div>
+              <div class="card"><div class="card-image"><img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?auto=format&fit=crop&w=600&q=80" alt="Chicken"><span class="badge">PREMIUM</span></div><h3>Chicken Boost</h3><p>Pechuga marinada a baja temp + queso proteico.</p><p class="price">9.00€</p><button class="btn" onclick="openCustomize(3, 'Chicken Boost', 9, 11, 'burger')">Personalizar • +11 pts</button></div>
+              <div class="card"><div class="card-image"><img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80" alt="BBQ"><span class="badge">PICANTE</span></div><h3>BBQ Fit</h3><p>Carne ahumada + jalapeños + bacon de pavo.</p><p class="price">8.50€</p><button class="btn" onclick="openCustomize(4, 'BBQ Fit', 8.5, 11, 'burger')">Personalizar • +11 pts</button></div>
+              <div class="card"><div class="card-image"><img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80" alt="Mediterranea"><span class="badge">SANA</span></div><h3>Mediterranean</h3><p>Feta + tomate seco + yogur griego + almendras.</p><p class="price">10.00€</p><button class="btn" onclick="openCustomize(5, 'Mediterranean', 10, 13, 'burger')">Personalizar • +13 pts</button></div>
+              <div class="card"><div class="card-image"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80" alt="Triple"><span class="badge">DELUXE</span></div><h3>Triple Stack</h3><p>3 patties de carne magra + huevo a la plancha.</p><p class="price">12.00€</p><button class="btn" onclick="openCustomize(6, 'Triple Stack', 12, 15, 'burger')">Personalizar • +15 pts</button></div>
             </div>
           </div>
 
           <div id="platos" class="menu-category">
             <div class="grid">
-              <div class="card"><div class="card-image"><img src="https://images.unsplash.com/photo-1594212699903-eca40ac91325?auto=format&fit=crop&w=600&q=80" alt="Power"></div><h3>Combo Power</h3><p>Burger a elegir + papas al horno + bebida proteica</p><p class="price">15.00€</p><button class="btn" onclick="openCheckout(9, 'Combo Power', 15, 20)">Añadir • +20 pts</button></div>
+              <div class="card"><div class="card-image"><img src="https://images.unsplash.com/photo-1594212699903-eca40ac91325?auto=format&fit=crop&w=600&q=80" alt="Power"></div><h3>Combo Power</h3><p>Burger a elegir + papas al horno + bebida proteica</p><p class="price">15.00€</p><button class="btn" onclick="openCustomize(9, 'Combo Power', 15, 20, 'combo')">Personalizar • +20 pts</button></div>
             </div>
           </div>
 
           <div id="entrantes" class="menu-category">
             <div class="grid">
-              <div class="card"><div class="card-image"><img src="https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=600&q=80" alt="Papas"></div><h3>Papas Caseras</h3><p>Al horno con aceite de oliva y sal marina.</p><p class="price">3.50€</p><button class="btn" onclick="openCheckout(13, 'Papas', 3.5, 4)">Añadir • +4 pts</button></div>
-              <div class="card"><div class="card-image"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80" alt="Ensalada"></div><h3>Ensalada Premium</h3><p>Mix de hojas, aguacate, nueces y vinagreta.</p><p class="price">5.00€</p><button class="btn" onclick="openCheckout(14, 'Ensalada', 5, 6)">Añadir • +6 pts</button></div>
+              <div class="card"><div class="card-image"><img src="https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=600&q=80" alt="Papas"></div><h3>Papas Caseras</h3><p>Al horno con aceite de oliva y sal marina.</p><p class="price">3.50€</p><button class="btn" onclick="openCustomize(13, 'Papas Caseras', 3.5, 4, 'side')">Personalizar • +4 pts</button></div>
+              <div class="card"><div class="card-image"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80" alt="Ensalada"></div><h3>Ensalada Premium</h3><p>Mix de hojas, aguacate, nueces y vinagreta.</p><p class="price">5.00€</p><button class="btn" onclick="openCustomize(14, 'Ensalada Premium', 5, 6, 'salad')">Personalizar • +6 pts</button></div>
             </div>
           </div>
 
           <div id="bebidas" class="menu-category">
             <div class="grid">
-              <div class="card"><div class="card-image"><img src="https://images.unsplash.com/photo-1626844131082-256783844137?auto=format&fit=crop&w=600&q=80" alt="Shake"></div><h3>Whey Shake</h3><p>30g de proteína aislada sabor vainilla o chocolate.</p><p class="price">4.50€</p><button class="btn" onclick="openCheckout(19, 'Protein Shake', 4.5, 5)">Añadir • +5 pts</button></div>
+              <div class="card"><div class="card-image"><img src="https://images.unsplash.com/photo-1626844131082-256783844137?auto=format&fit=crop&w=600&q=80" alt="Shake"></div><h3>Whey Shake</h3><p>30g de proteína aislada sabor vainilla o chocolate.</p><p class="price">4.50€</p><button class="btn" onclick="openCustomize(19, 'Whey Shake', 4.5, 5, 'drink')">Personalizar • +5 pts</button></div>
             </div>
           </div>
 
           <div id="postres" class="menu-category">
             <div class="grid">
-              <div class="card"><div class="card-image"><img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=600&q=80" alt="Brownie"></div><h3>Brownie Keto</h3><p>Harina de almendras y chocolate 90% puro.</p><p class="price">4.00€</p><button class="btn" onclick="openCheckout(25, 'Brownie', 4, 5)">Añadir • +5 pts</button></div>
+              <div class="card"><div class="card-image"><img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=600&q=80" alt="Brownie"></div><h3>Brownie Keto</h3><p>Harina de almendras y chocolate 90% puro.</p><p class="price">4.00€</p><button class="btn" onclick="openCustomize(25, 'Brownie Keto', 4, 5, 'dessert')">Personalizar • +5 pts</button></div>
             </div>
           </div>
         </div>
       </section>
 
       <section id="rewards" class="container">
-        <h2>🎁 Canjea tus Puntos</h2>
+        <h2><svg class="icon" style="width:36px;height:36px;color:var(--color-accent);"><use href="#i-gift"/></svg> Canjea tus Puntos</h2>
         <p class="muted">Aprovecha tu esfuerzo. Usa tus puntos para descuentos o meses gratis en JalFits.</p>
         <div class="grid">
-          <div class="card reward"><div class="reward-icon">🥤</div><h3>Bebida Gratis</h3><p style="margin-bottom:15px; color:var(--color-text-light);">70 Puntos</p><button class="btn" onclick="redeemReward('Bebida Gratis', 70)">Canjear</button></div>
-          <div class="card reward"><div class="reward-icon">🍔</div><h3>Burger Gratis</h3><p style="margin-bottom:15px; color:var(--color-text-light);">150 Puntos</p><button class="btn" onclick="redeemReward('Hamburguesa Gratis', 150)">Canjear</button></div>
-          <div class="card reward"><div class="reward-icon">🎟️</div><h3>Mes Gym JalFits</h3><p style="margin-bottom:15px; color:var(--color-text-light);">300 Puntos</p><button class="btn" onclick="redeemReward('Membresía JalFits', 300)">Canjear</button></div>
+          <div class="card reward">
+            <div class="reward-icon"><svg class="icon"><use href="#i-cup"/></svg></div>
+            <h3>Bebida Gratis</h3><p style="margin-bottom:15px; color:var(--color-text-light);">70 Puntos</p>
+            <button class="btn ghost" onclick="redeemReward('Bebida Gratis', 70)">Canjear</button>
+          </div>
+          <div class="card reward">
+            <div class="reward-icon"><svg class="icon"><use href="#i-burger"/></svg></div>
+            <h3>Burger Gratis</h3><p style="margin-bottom:15px; color:var(--color-text-light);">150 Puntos</p>
+            <button class="btn" onclick="redeemReward('Hamburguesa Gratis', 150)">Canjear</button>
+          </div>
+          <div class="card reward">
+            <div class="reward-icon"><svg class="icon"><use href="#i-gym"/></svg></div>
+            <h3>Mes Gym JalFits</h3><p style="margin-bottom:15px; color:var(--color-text-light);">300 Puntos</p>
+            <button class="btn" onclick="redeemReward('Membresía JalFits', 300)">Canjear</button>
+          </div>
         </div>
       </section>
     </main>
@@ -390,12 +429,14 @@
           JalFits
         </a>
         <button class="menu-toggle" onclick="toggleMobileMenu()">
-          <svg class="icon" style="margin:0;"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg class="icon" style="margin:0;"><use href="#i-menu"/></svg>
         </button>
         <nav class="main-nav">
           <a onclick="navigateAndScroll('view-jalfits', 'plans')">Planes</a>
-          <a onclick="navigateAndScroll('view-jalamburguers', 'view-jalamburguers')">Jalamburguers</a>
-          <button class="btn auth-btn" style="padding: 8px 20px; font-size: 0.85rem; width: 100%; border:none;">Mi Cuenta</button>
+          <a href="#jalamburguers">← Volver a Burgers</a>
+          <button class="btn auth-btn" style="padding: 8px 20px; font-size: 0.85rem; width: 100%; border:none;">
+            <svg class="icon"><use href="#i-user"/></svg> Mi Cuenta
+          </button>
         </nav>
       </nav>
     </div>
@@ -435,20 +476,20 @@
 
     <main>
       <section id="plans" class="container">
-        <h2 style="text-align:center;">Membresías JalFits</h2>
+        <h2 style="text-align:center;"><svg class="icon"><use href="#i-ticket"/></svg> Membresías JalFits</h2>
         <p class="muted" style="text-align:center;">Elige el plan que se adapte a tu ritmo. Sin ataduras.</p>
         <div class="grid">
           <div class="plan-card-expanded">
             <h3 style="font-size: 2rem; margin:0;">Básico</h3>
             <p class="price" style="font-size: 3.5rem; margin:10px 0;">29€<small style="font-size:1rem; color:var(--color-text-light);">/mes</small></p>
             <p style="margin-bottom: 20px; font-weight: 600;">Acceso 24/7 a sala fitness</p>
-            <button class="btn" style="width:100%; margin-top:auto;" onclick="selectPlan('Basico', 29)">Seleccionar</button>
+            <button class="btn ghost" style="width:100%; margin-top:auto;" onclick="selectPlan('Basico', 29)">Seleccionar</button>
           </div>
           <div class="plan-card-expanded featured">
             <div class="plan-badge">PREMIUM</div>
-            <h3 style="font-size: 2rem; margin:0;">Total</h3>
+            <h3 style="font-size: 2rem; margin:0; color:white;">Total</h3>
             <p class="price" style="font-size: 3.5rem; margin:10px 0; color:white;">59€<small style="font-size:1rem; color:#ddd;">/mes</small></p>
-            <p style="margin-bottom: 20px; font-weight: 600;">Acceso + Clases + 4 Asesorías</p>
+            <p style="margin-bottom: 20px; font-weight: 600; color:white;">Acceso + Clases + 4 Asesorías</p>
             <button class="btn" style="width:100%; margin-top:auto;" onclick="selectPlan('Total', 59)">Seleccionar</button>
           </div>
           <div class="plan-card-expanded">
@@ -460,8 +501,8 @@
         </div>
       </section>
 
-      <section class="container" style="background: var(--color-card); padding: 40px; border-radius: 20px; margin: 50px auto; border: 2px solid var(--color-accent); box-shadow: var(--shadow-lg);">
-        <h2 style="text-align: center; font-size:clamp(1.5rem, 3vw, 2rem);">🔍 Portal del Socio</h2>
+      <section class="container" style="background: var(--color-card); padding: 40px; border-radius: 20px; margin: 50px auto; border: 1px solid var(--color-border); box-shadow: var(--shadow-sm);">
+        <h2 style="text-align: center; font-size:clamp(1.5rem, 3vw, 2rem);"><svg class="icon"><use href="#i-search"/></svg> Portal del Socio</h2>
         <p style="text-align: center; color: var(--color-text-light); margin-bottom: 20px;">Verifica la caducidad de tu tarjeta (Ej: JAL-1234-ABCD)</p>
         <div style="display: flex; gap: 10px; max-width: 600px; margin: 0 auto; flex-wrap: wrap;">
           <input type="text" id="gym-code-check" placeholder="Introduce tu código" style="flex: 1; min-width:200px; padding: 14px; border-radius: 10px; border: 1px solid var(--color-border); background: var(--color-bg); color: var(--color-text); font-size: 16px; text-transform: uppercase;">
@@ -498,11 +539,29 @@
             <div class="form-group"><label>DNI / NIF</label><input name="dni" required></div>
             <div class="form-group"><label>Dirección (Para enviar tarjeta física NFC)</label><input type="text" name="address" placeholder="Calle, Número, Ciudad"></div>
             <div class="form-group"><label>Método de pago seguro</label>
-              <select name="payment">
+              <select name="payment" id="gym-payment-method" onchange="toggleGymCardFields()">
                 <option value="card">Tarjeta de Crédito / Débito</option>
                 <option value="paypal">PayPal</option>
               </select>
             </div>
+            
+            <div id="gym-credit-card-fields" style="background: var(--color-bg); padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid var(--color-border);">
+              <div class="form-group">
+                <label>Número de Tarjeta</label>
+                <input type="text" id="gym-cc-number" placeholder="0000 0000 0000 0000" pattern="\d{16}" maxlength="16" title="Debe contener exactamente 16 números" required>
+              </div>
+              <div class="card-fields">
+                <div class="form-group" style="flex: 1;">
+                  <label>Caducidad</label>
+                  <input type="text" id="gym-cc-exp" placeholder="MM/YY" maxlength="5" required>
+                </div>
+                <div class="form-group" style="flex: 0.6;">
+                  <label>CVC</label>
+                  <input type="text" id="gym-cc-cvc" placeholder="123" pattern="\d{3,4}" maxlength="4" required>
+                </div>
+              </div>
+            </div>
+
             <button class="btn" type="submit" style="width:100%; margin-top:15px; padding: 16px; border:none;">Pagar y Generar Tarjeta</button>
           </form>
           <div id="gym-register-result" style="margin-top:20px;"></div>
@@ -566,6 +625,28 @@
     </div>
   </div>
 
+  <div id="customize-modal" class="modal-overlay">
+    <div class="modal" style="max-width: 400px;">
+      <div class="modal-header" style="border:none; padding-bottom: 0;">
+        <h2 id="cust-name" style="margin-bottom: 0;">Producto</h2>
+        <button class="modal-close" onclick="closeCustomize()">✕</button>
+      </div>
+      <div class="modal-body" style="display:block; padding-top: 10px;">
+        <p id="cust-price" style="font-size: 1.8rem; color: var(--color-accent); font-weight: 900; margin-top: 0; margin-bottom: 20px;">0.00€</p>
+        
+        <div id="cust-options">
+          </div>
+
+        <div class="form-group" style="margin-top: 25px;">
+          <label>Cantidad</label>
+          <input type="number" id="cust-qty" value="1" min="1" max="10" style="font-size: 1.2rem; font-weight: bold; text-align: center;">
+        </div>
+        
+        <button class="btn" style="width: 100%; margin-top: 15px;" onclick="confirmAddToCart()">Añadir al Carrito</button>
+      </div>
+    </div>
+  </div>
+
   <div id="auth-modal" class="modal-overlay">
     <div class="modal">
       <div class="modal-header">
@@ -597,11 +678,12 @@
   <div id="checkout-modal" class="modal-overlay">
     <div class="modal" style="max-width: 500px;">
       <div class="modal-header">
-        <h2>Confirmar Pedido</h2>
+        <h2><svg class="icon"><use href="#i-cart"/></svg> Confirmar Pedido</h2>
         <button class="modal-close" onclick="closeCheckout()">✕</button>
       </div>
       <div class="modal-body" style="display:block;">
         <div id="cart-items" style="background: var(--color-bg); padding: 15px; border-radius: 10px; margin-bottom: 20px;"></div>
+        
         <div class="form-group">
           <label>¿Cómo lo quieres?</label>
           <select id="cart-delivery" onchange="toggleDelivery()">
@@ -613,6 +695,33 @@
           <label>Dirección de Envío Completa</label>
           <input type="text" id="cart-address" placeholder="Ej: Calle Principal 123, Puerta 2">
         </div>
+
+        <div class="form-group">
+          <label>Método de Pago</label>
+          <select id="cart-payment" onchange="toggleBurgerCardFields()">
+            <option value="card">Tarjeta de Crédito / Débito</option>
+            <option value="paypal">PayPal</option>
+            <option value="cash">Pagar al Recibir/Recoger</option>
+          </select>
+        </div>
+
+        <div id="burger-credit-card-fields" style="background: rgba(0,0,0,0.02); padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid var(--color-border);">
+          <div class="form-group">
+            <label>Número de Tarjeta</label>
+            <input type="text" id="burger-cc-number" placeholder="0000 0000 0000 0000" pattern="\d{16}" maxlength="16" title="Debe contener exactamente 16 números" required>
+          </div>
+          <div class="card-fields">
+            <div class="form-group" style="flex: 1;">
+              <label>Caducidad</label>
+              <input type="text" id="burger-cc-exp" placeholder="MM/YY" maxlength="5" required>
+            </div>
+            <div class="form-group" style="flex: 0.6;">
+              <label>CVC</label>
+              <input type="text" id="burger-cc-cvc" placeholder="123" pattern="\d{3,4}" maxlength="4" required>
+            </div>
+          </div>
+        </div>
+
         <div style="display: flex; justify-content: space-between; font-size: 1.5rem; font-weight: 900; color: var(--color-accent); margin: 20px 0; padding-top: 20px; border-top: 2px solid var(--color-border);">
           <span>TOTAL:</span><span id="cart-total">0.00€</span>
         </div>
@@ -624,6 +733,9 @@
   <div class="toast-container" id="toast-container"></div>
 
   <script>
+    /* ==========================================
+       1. ENRUTADOR, TEMAS Y NAVEGACIÓN
+       ========================================== */
     function handleRoute() {
       const hash = window.location.hash || '#jalamburguers';
       document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
@@ -657,9 +769,9 @@
     function navigateAndScroll(viewId, sectionId) {
       if (!document.getElementById(viewId).classList.contains('active')) {
         window.location.hash = '#' + viewId.replace('view-', '');
-        setTimeout(() => { document.getElementById(sectionId).scrollIntoView({behavior:'smooth', block: 'start'}); }, 100);
+        setTimeout(() => { document.getElementById(sectionId).scrollIntoView({behavior:'smooth'}); }, 100);
       } else {
-        document.getElementById(sectionId).scrollIntoView({behavior:'smooth', block: 'start'});
+        document.getElementById(sectionId).scrollIntoView({behavior:'smooth'});
       }
       document.querySelectorAll('.main-nav').forEach(nav => nav.classList.remove('active-mobile'));
     }
@@ -673,7 +785,7 @@
       const activeView = document.querySelector('.app-view.active');
       activeView.querySelectorAll('.menu-category').forEach(cat => cat.classList.remove('active'));
       document.getElementById(categoryId).classList.add('active');
-      activeView.querySelectorAll('.menu-dropdown-btn').forEach(btn => btn.classList.remove('active'));
+      activeView.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       event.target.classList.add('active');
     }
 
@@ -694,7 +806,12 @@
         const container = document.getElementById('toast-container');
         const toast = document.createElement('div');
         toast.className = `toast ${type}`;
-        toast.innerHTML = `<div style="flex:1;"><strong style="font-size:1.05rem;">${title}</strong><br><span style="font-size:0.9rem; opacity:0.9;">${message}</span></div><button class="toast-close" onclick="this.parentElement.remove()">✕</button>`;
+        
+        let iconHtml = '';
+        if(type === 'success') iconHtml = `<svg class="icon" style="width:24px;height:24px;stroke:#10b981;"><polyline points="20 6 9 17 4 12"/></svg>`;
+        else iconHtml = `<svg class="icon" style="width:24px;height:24px;stroke:#ef4444;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
+
+        toast.innerHTML = `${iconHtml} <div style="flex:1;"><strong style="font-size:1.05rem;">${title}</strong><br><span style="font-size:0.9rem; opacity:0.9;">${message}</span></div><button class="toast-close" onclick="this.parentElement.remove()">✕</button>`;
         container.appendChild(toast);
         setTimeout(() => { if(toast.parentElement) toast.remove(); }, 4000);
       },
@@ -743,12 +860,12 @@
       updateUI() {
         const btns = document.querySelectorAll('.auth-btn');
         if(this.currentUser) {
-          btns.forEach(b => { b.innerHTML = `<svg class="icon"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ${this.currentUser.name}`; b.onclick = () => { if(confirm('¿Quieres cerrar tu sesión?')) this.logout(); }; });
+          btns.forEach(b => { b.innerHTML = `<svg class="icon"><use href="#i-user"/></svg> ${this.currentUser.name}`; b.onclick = () => { if(confirm('¿Quieres cerrar tu sesión?')) this.logout(); }; });
           const p = document.getElementById('points'); if(p) p.innerText = this.currentUser.points;
           const pu = document.getElementById('purchases'); if(pu) pu.innerText = this.currentUser.purchases;
           const r = document.getElementById('revenue'); if(r) r.innerText = this.currentUser.revenue.toFixed(2) + '€';
         } else {
-          btns.forEach(b => { b.innerHTML = `<svg class="icon"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Ingresar`; b.onclick = () => openAuthModal(); });
+          btns.forEach(b => { b.innerHTML = `<svg class="icon"><use href="#i-login"/></svg> Ingresar`; b.onclick = () => openAuthModal(); });
           const p = document.getElementById('points'); if(p) p.innerText = '0';
           const pu = document.getElementById('purchases'); if(pu) pu.innerText = '0';
           const r = document.getElementById('revenue'); if(r) r.innerText = '0.00€';
@@ -763,40 +880,212 @@
     function handleRegister(e) { e.preventDefault(); authManager.register(document.getElementById('reg-name').value, document.getElementById('reg-email').value, document.getElementById('reg-password').value); }
     function handleLogin(e) { e.preventDefault(); authManager.login(document.getElementById('login-email').value, document.getElementById('login-password').value); }
 
+    /* ==========================================
+       5. SISTEMA DE PERSONALIZACIÓN Y CARRITO
+       ========================================== */
     let cart = JSON.parse(localStorage.getItem('jal_cart')) || [];
-    function openCheckout(id, name, price, pts) {
-      if(!authManager.currentUser) { Toasts.error('Sesión Requerida', 'Debes iniciar sesión para comprar y ganar puntos.'); openAuthModal(); return; }
-      const existing = cart.find(i => i.id === id);
-      if(existing) existing.qty++; else cart.push({id, name, price, pts, qty: 1});
+    updateCartCount();
+
+    // Variables temporales para el modal de personalización
+    let tempItem = null;
+
+    const CustomOptions = {
+      'burger': [
+        { id: 'bacon', label: '+ Extra Bacon Pavo', price: 1.50, type: 'add' },
+        { id: 'queso', label: '+ Doble Queso Proteico', price: 1.00, type: 'add' },
+        { id: 'huevo', label: '+ Huevo Plancha', price: 1.00, type: 'add' },
+        { id: 'no-tomate', label: 'Sin Tomate', price: 0, type: 'remove' },
+        { id: 'no-cebolla', label: 'Sin Cebolla', price: 0, type: 'remove' }
+      ],
+      'side': [
+        { id: 'salsa-queso', label: '+ Salsa de Queso Light', price: 1.00, type: 'add' },
+        { id: 'salsa-bbq', label: '+ Salsa BBQ Zero', price: 0.50, type: 'add' }
+      ],
+      'drink': [
+        { id: 'extra-scoop', label: '+ Scoop Extra Whey', price: 1.50, type: 'add' },
+        { id: 'leche-avena', label: 'Leche de Avena', price: 0.50, type: 'add' },
+        { id: 'no-hielo', label: 'Sin Hielo', price: 0, type: 'remove' }
+      ],
+      'dessert': [
+        { id: 'sirope', label: '+ Sirope Cacao Puro', price: 0.50, type: 'add' }
+      ],
+      'combo': [
+        { id: 'agrandar', label: '+ Agrandar Papas y Bebida', price: 2.50, type: 'add' }
+      ]
+    };
+
+    function openCustomize(id, name, price, pts, type) {
+      if(!authManager.currentUser) { Toasts.error('Sesión Requerida', 'Inicia sesión para comprar y ganar puntos.'); openAuthModal(); return; }
+      
+      tempItem = { id, name, basePrice: price, price, pts, type, options: [], qty: 1 };
+      
+      document.getElementById('cust-name').innerText = name;
+      document.getElementById('cust-price').innerText = price.toFixed(2) + '€';
+      document.getElementById('cust-qty').value = 1;
+      
+      const optionsContainer = document.getElementById('cust-options');
+      optionsContainer.innerHTML = '';
+
+      if(CustomOptions[type]) {
+        CustomOptions[type].forEach(opt => {
+          let priceTag = opt.price > 0 ? `<span class="custom-option-price">+${opt.price.toFixed(2)}€</span>` : `<span style="color:var(--color-text-light);">Gratis</span>`;
+          optionsContainer.innerHTML += `
+            <label class="custom-option">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <input type="checkbox" value="${opt.id}" data-price="${opt.price}" data-label="${opt.label}" onchange="updateTempPrice()">
+                <span>${opt.label}</span>
+              </div>
+              ${priceTag}
+            </label>
+          `;
+        });
+      }
+      
+      document.getElementById('customize-modal').classList.add('active');
+    }
+
+    function updateTempPrice() {
+      if(!tempItem) return;
+      let newPrice = tempItem.basePrice;
+      const checkboxes = document.querySelectorAll('#cust-options input[type="checkbox"]:checked');
+      
+      tempItem.options = [];
+      checkboxes.forEach(cb => {
+        newPrice += parseFloat(cb.dataset.price);
+        tempItem.options.push(cb.dataset.label);
+      });
+      
+      tempItem.price = newPrice;
+      document.getElementById('cust-price').innerText = newPrice.toFixed(2) + '€';
+    }
+
+    function confirmAddToCart() {
+      if(!tempItem) return;
+      const qty = parseInt(document.getElementById('cust-qty').value) || 1;
+      tempItem.qty = qty;
+      
+      // Crear un "identificador único" basado en el producto y sus opciones elegidas
+      const uniqueCartId = tempItem.id + '_' + tempItem.options.join('-');
+      
+      const existing = cart.find(i => i.uniqueCartId === uniqueCartId);
+      if(existing) {
+        existing.qty += qty;
+      } else {
+        cart.push({
+          uniqueCartId: uniqueCartId,
+          id: tempItem.id,
+          name: tempItem.name,
+          price: tempItem.price,
+          pts: tempItem.pts,
+          qty: tempItem.qty,
+          options: tempItem.options
+        });
+      }
+      
       localStorage.setItem('jal_cart', JSON.stringify(cart));
+      updateCartCount();
+      closeCustomize();
+      Toasts.success('Añadido al Carrito', `${qty}x ${tempItem.name}`);
+    }
+
+    function closeCustomize() { document.getElementById('customize-modal').classList.remove('active'); tempItem = null; }
+
+    function openCartModal() {
+      if(!authManager.currentUser) { Toasts.error('Sesión Requerida', 'Inicia sesión para ver tu carrito.'); openAuthModal(); return; }
       renderCart();
       document.getElementById('checkout-modal').classList.add('active');
+    }
+
+    function updateCartCount() {
+      const count = cart.reduce((sum, item) => sum + item.qty, 0);
+      const badge = document.getElementById('cart-count-badge');
+      if(badge) {
+        badge.innerText = count;
+        badge.style.display = count > 0 ? 'inline-block' : 'none';
+      }
     }
 
     function renderCart() {
       const container = document.getElementById('cart-items');
       container.innerHTML = '';
       let total = 0;
-      if(cart.length === 0) { container.innerHTML = '<p style="text-align:center; font-weight:bold;">Tu carrito está vacío.</p>'; document.getElementById('cart-total').innerText = '0.00€'; return; }
+      if(cart.length === 0) { container.innerHTML = '<p style="text-align:center; font-weight:bold;">Tu carrito está vacío.</p>'; document.getElementById('cart-total').innerText = '0.00€'; updateCartCount(); return; }
       
       cart.forEach((item, index) => {
         total += item.price * item.qty;
-        container.innerHTML += `<div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--color-border);"><div><strong style="color:var(--color-text);">${item.name}</strong> <span style="color:var(--color-text-light);">x${item.qty}</span></div><div style="display:flex; align-items:center; gap:15px;"><span style="color:var(--color-accent); font-weight:bold;">${(item.price * item.qty).toFixed(2)}€</span><button onclick="removeItem(${index})" style="background:#ef4444; color:white; border:none; border-radius:5px; padding:6px 12px; cursor:pointer; font-weight:bold;">X</button></div></div>`;
+        
+        let optionsHtml = '';
+        if(item.options && item.options.length > 0) {
+          optionsHtml = `<div style="font-size: 0.8rem; color: var(--color-text-light); margin-top: 4px;">${item.options.join(', ')}</div>`;
+        }
+
+        container.innerHTML += `
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--color-border);">
+            <div style="flex:1;">
+              <strong style="color:var(--color-text);">${item.name}</strong> <span style="color:var(--color-text-light); font-weight:bold;">x${item.qty}</span>
+              ${optionsHtml}
+            </div>
+            <div style="display:flex; align-items:center; gap:15px; margin-left:10px;">
+              <span style="color:var(--color-accent); font-weight:bold;">${(item.price * item.qty).toFixed(2)}€</span>
+              <button onclick="removeItem(${index})" style="background:#ef4444; color:white; border:none; border-radius:8px; padding:6px 12px; cursor:pointer; font-weight:bold;">✕</button>
+            </div>
+          </div>`;
       });
       const mode = document.getElementById('cart-delivery').value;
       if(mode === 'delivery') total += 2.50; 
       document.getElementById('cart-total').innerText = total.toFixed(2) + '€';
+      updateCartCount();
+      toggleBurgerCardFields(); // Check if fields need to be required
     }
 
     function removeItem(index) { cart.splice(index, 1); localStorage.setItem('jal_cart', JSON.stringify(cart)); renderCart(); }
+    
     function toggleDelivery() { document.getElementById('address-box').style.display = document.getElementById('cart-delivery').value === 'delivery' ? 'block' : 'none'; renderCart(); }
+    
+    function toggleBurgerCardFields() {
+      const method = document.getElementById('cart-payment').value;
+      const ccFields = document.getElementById('burger-credit-card-fields');
+      const ccNumber = document.getElementById('burger-cc-number');
+      const ccExp = document.getElementById('burger-cc-exp');
+      const ccCvc = document.getElementById('burger-cc-cvc');
+      
+      if(method === 'card') {
+        ccFields.style.display = 'block';
+        ccNumber.setAttribute('required', 'true');
+        ccExp.setAttribute('required', 'true');
+        ccCvc.setAttribute('required', 'true');
+      } else {
+        ccFields.style.display = 'none';
+        ccNumber.removeAttribute('required');
+        ccExp.removeAttribute('required');
+        ccCvc.removeAttribute('required');
+      }
+    }
+
     function closeCheckout() { document.getElementById('checkout-modal').classList.remove('active'); }
 
     function processOrder() {
       if(cart.length === 0) return Toasts.error('Error', 'Añade productos antes de pagar.');
+      
       const mode = document.getElementById('cart-delivery').value;
       const addr = document.getElementById('cart-address').value;
+      const paymentMethod = document.getElementById('cart-payment').value;
+
       if(mode === 'delivery' && !addr.trim()) return Toasts.error('Falta Dirección', 'Escribe a dónde enviamos el pedido.');
+      
+      // Validación estricta de Tarjeta si está seleccionada
+      if(paymentMethod === 'card') {
+        const ccNum = document.getElementById('burger-cc-number').value.replace(/\s/g, '');
+        const ccExp = document.getElementById('burger-cc-exp').value;
+        const ccCvc = document.getElementById('burger-cc-cvc').value;
+
+        if(ccNum.length !== 16 || isNaN(ccNum)) {
+          return Toasts.error('Tarjeta Inválida', 'El número de tarjeta debe tener exactamente 16 dígitos numéricos.');
+        }
+        if(!ccExp || !ccCvc) {
+          return Toasts.error('Datos Incompletos', 'Rellena la caducidad y el CVC.');
+        }
+      }
       
       let totalMoney = mode === 'delivery' ? 2.50 : 0;
       let totalPts = 0;
@@ -804,11 +1093,21 @@
       
       authManager.addPurchaseData(totalPts, totalMoney);
       cart = []; localStorage.setItem('jal_cart', JSON.stringify(cart));
+      updateCartCount();
       closeCheckout();
+      
       const msg = mode === 'delivery' ? `Pedido en camino a: ${addr}` : `Te esperamos en la barra para recoger.`;
       Toasts.success('¡Pago Aprobado!', `${msg} <br>Has sumado <strong>+${totalPts} pts</strong>.`);
+      
+      // Limpiar campos tarjeta
+      document.getElementById('burger-cc-number').value = '';
+      document.getElementById('burger-cc-exp').value = '';
+      document.getElementById('burger-cc-cvc').value = '';
     }
 
+    /* ==========================================
+       6. CANJEO DE RECOMPENSAS
+       ========================================== */
     function redeemReward(rewardName, pointsNeeded) {
       if(!authManager.currentUser) { Toasts.error('Inicia sesión', 'Necesitas tu cuenta para canjear.'); openAuthModal(); return; }
       if(authManager.currentUser.points >= pointsNeeded) {
@@ -823,10 +1122,42 @@
       } else { Toasts.error('Puntos insuficientes', `Te faltan ${pointsNeeded - authManager.currentUser.points} puntos.`); }
     }
 
+    /* ==========================================
+       7. TARJETAS GYM JALFITS
+       ========================================== */
+    function toggleGymCardFields() {
+      const method = document.getElementById('gym-payment-method').value;
+      const ccFields = document.getElementById('gym-credit-card-fields');
+      const ccNumber = document.getElementById('gym-cc-number');
+      const ccExp = document.getElementById('gym-cc-exp');
+      const ccCvc = document.getElementById('gym-cc-cvc');
+      
+      if(method === 'card') {
+        ccFields.style.display = 'block';
+        ccNumber.setAttribute('required', 'true');
+        ccExp.setAttribute('required', 'true');
+        ccCvc.setAttribute('required', 'true');
+      } else {
+        ccFields.style.display = 'none';
+        ccNumber.removeAttribute('required');
+        ccExp.removeAttribute('required');
+        ccCvc.removeAttribute('required');
+      }
+    }
+
     function selectPlan(planName, price) { window.location.hash = `#jalfits-register?plan=${planName}&price=${price}`; }
 
     function onRegisterSubmit(e) {
       e.preventDefault();
+      
+      const paymentMethod = document.getElementById('gym-payment-method').value;
+      if(paymentMethod === 'card') {
+        const ccNum = document.getElementById('gym-cc-number').value.replace(/\s/g, '');
+        if(ccNum.length !== 16 || isNaN(ccNum)) {
+          return Toasts.error('Tarjeta Inválida', 'El número de tarjeta debe tener exactamente 16 dígitos numéricos.');
+        }
+      }
+
       const plan = document.getElementById('form-plan').value;
       const name = e.target.name.value;
       const address = e.target.address.value;
@@ -840,6 +1171,7 @@
       let extraMsg = address ? `Enviaremos la tarjeta NFC a: <strong>${address}</strong> en 48h.` : `Usa este código en los tornos de entrada.`;
       document.getElementById('gym-register-result').innerHTML = `<div style="background:var(--color-bg); border:2px solid var(--color-accent); padding:20px; border-radius:15px; text-align:center; color:var(--color-text); margin-top: 20px;"><h3 style="color:var(--color-accent); margin-top:0;">✅ ¡Pago Procesado!</h3><p>Tu código de socio activo es:</p><h2 style="font-size:2rem; letter-spacing:3px; margin:10px 0; background:#000; padding:10px; border-radius:10px; color:white;">${code}</h2><p style="font-size:0.9rem; color:var(--color-text-light);">${extraMsg}</p><button class="btn" style="margin-top:10px; border:none;" onclick="window.location.hash='#jalfits'">Entrar al Portal</button></div>`;
       e.target.reset();
+      toggleGymCardFields();
     }
 
     function checkGymCode() {
